@@ -1,0 +1,54 @@
+[gd_scene load_steps=5 format=3 uid="uid://b85biewuwnolt"]
+
+[ext_resource type="Script" path="res://scripts/Tile.gd" id="1_k8p38"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_35coj"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nyco1"]
+albedo_color = Color(1, 0.639216, 0.313726, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_2j2je"]
+size = Vector3(1, 0.198242, 1)
+
+[node name="TIntPiece" type="Node3D" node_paths=PackedStringArray("spawnNodes")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
+script = ExtResource("1_k8p38")
+tileName = "TInt"
+spawnNodes = [NodePath("SpawnNode1"), NodePath("SpawnNode2")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, -0.4, 0)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_nyco1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0.4, 0)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_nyco1")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 1, 0.4, 0, 0)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_nyco1")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, -0.4, 0, -0.4)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_nyco1")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.2, 0, 0, 0, 1, 0, 0, 0, 0.2, -0.4, 0, 0.4)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_nyco1")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.400879, 0)
+shape = SubResource("BoxShape3D_2j2je")
+
+[node name="SpawnNode1" type="Node3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -1)
+
+[node name="SpawnNode2" type="Node3D" parent="."]
+transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 1)

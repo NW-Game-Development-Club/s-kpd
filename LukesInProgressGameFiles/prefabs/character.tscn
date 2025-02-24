@@ -1,0 +1,51 @@
+[gd_scene load_steps=6 format=3 uid="uid://ensq5srthb1s"]
+
+[ext_resource type="Script" path="res://scripts/characterMovement.gd" id="1_bfpak"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ebwuh"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_e7rta"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_385ov"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_d3746"]
+radius = 0.351076
+
+[node name="Character" type="RigidBody3D" node_paths=PackedStringArray("feet", "label", "character_body")]
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
+script = ExtResource("1_bfpak")
+feet = NodePath("Feet")
+label = NodePath("Label")
+character_body = NodePath("Rotation Helper")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02571, 0)
+shape = SubResource("CapsuleShape3D_ebwuh")
+
+[node name="Rotation Helper" type="Node3D" parent="."]
+
+[node name="BodyMesh" type="MeshInstance3D" parent="Rotation Helper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02571, 0)
+mesh = SubResource("CapsuleMesh_e7rta")
+skeleton = NodePath("../../CollisionShape3D")
+
+[node name="EyeMesh" type="MeshInstance3D" parent="Rotation Helper/BodyMesh"]
+transform = Transform3D(0.801884, 0, 0, 0, 0.198757, 0, 0, 0, 0.534432, 0, 0.49705, -0.286436)
+mesh = SubResource("BoxMesh_385ov")
+skeleton = NodePath("../../Camera3D")
+
+[node name="Camera3D" type="Camera3D" parent="Rotation Helper"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52276, 0)
+near = 0.3
+
+[node name="Feet" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Feet"]
+shape = SubResource("SphereShape3D_d3746")
+
+[node name="Label" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Speed: "

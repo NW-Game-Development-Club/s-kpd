@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://cnai622jgu4j7"]
+
+[ext_resource type="Script" path="res://scripts/level_generator.gd" id="1_46sns"]
+[ext_resource type="PackedScene" uid="uid://bc7h4gl8yqj3k" path="res://prefabs/parts/straight_piece.tscn" id="2_fj5d4"]
+[ext_resource type="PackedScene" uid="uid://enltvhwyml0v" path="res://prefabs/parts/corner_piece.tscn" id="3_h7gme"]
+[ext_resource type="PackedScene" uid="uid://b85biewuwnolt" path="res://prefabs/parts/t_int_piece.tscn" id="4_6hfd3"]
+[ext_resource type="PackedScene" uid="uid://bg66aumssuwo7" path="res://prefabs/parts/4_way_piece.tscn" id="5_7odpp"]
+[ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="6_l25i0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5kxnl"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Level Generator" type="Node3D" parent="."]
+script = ExtResource("1_46sns")
+pieces = Array[PackedScene]([ExtResource("2_fj5d4"), ExtResource("3_h7gme"), ExtResource("4_6hfd3"), ExtResource("5_7odpp")])
+amtOfPiecesToSpawn = 40
+
+[node name="Button" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 22.0
+offset_right = 223.0
+offset_bottom = 83.0
+text = "Generate Level"
+
+[node name="Character" parent="." instance=ExtResource("6_l25i0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35795, 0, 3.46788)
+gravity_scale = 0.0
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Character"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(11.0996, 0, 0, 0, 1, 0, 0, 0, 1.7661, 0, 6.51303, -10.9996)
+mesh = SubResource("BoxMesh_5kxnl")
+
+[connection signal="pressed" from="Button" to="Level Generator" method="_on_button_pressed"]
