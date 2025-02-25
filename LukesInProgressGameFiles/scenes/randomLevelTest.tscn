@@ -16,16 +16,8 @@ script = ExtResource("1_46sns")
 pieces = Array[PackedScene]([ExtResource("2_fj5d4"), ExtResource("3_h7gme"), ExtResource("4_6hfd3"), ExtResource("5_7odpp")])
 amtOfPiecesToSpawn = 40
 
-[node name="Button" type="Button" parent="."]
-offset_left = 20.0
-offset_top = 22.0
-offset_right = 223.0
-offset_bottom = 83.0
-text = "Generate Level"
-
 [node name="Character" parent="." instance=ExtResource("6_l25i0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35795, 0, 3.46788)
-gravity_scale = 0.0
 isDebugMode = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Character"]
@@ -33,5 +25,3 @@ isDebugMode = true
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(11.0996, 0, 0, 0, 1, 0, 0, 0, 1.7661, 0, 6.51303, -10.9996)
 mesh = SubResource("BoxMesh_5kxnl")
-
-[connection signal="pressed" from="Button" to="Level Generator" method="_on_button_pressed"]

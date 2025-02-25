@@ -28,6 +28,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if Input.is_action_just_pressed("toggleDebugFlight"):
 		isDebugMode = !isDebugMode
 		print("Debug flight "+ ("Activated!" if isDebugMode else "Deactivated!"))
+	if gravity_scale != 0 if isDebugMode else 1:
+		gravity_scale = 0 if isDebugMode else 1 # THIS MIGHT BE A BIT JANKY IN LEVELS SO BE CAREFUL
 	
 	var move_direction = Vector3.ZERO
 	
