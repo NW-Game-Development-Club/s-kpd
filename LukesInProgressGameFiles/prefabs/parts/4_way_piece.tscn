@@ -60,8 +60,3 @@ transform = Transform3D(1.19249e-08, 0, -1, 0, 1, 0, 1, 0, 1.19249e-08, 0, 0, 1)
 
 [node name="SpawnNode3" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, -1)
-
-[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.4, -0.244798, 0.0204048)
-mesh = SubResource("BoxMesh_35coj")
-surface_material_override/0 = SubResource("StandardMaterial3D_w6jut")

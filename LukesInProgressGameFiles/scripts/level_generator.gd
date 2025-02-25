@@ -10,13 +10,15 @@ func _ready() -> void:
 
 func pickBiasedRandomPiece():
 	var random_float = randf()
-	if random_float < 0.4:
+	if random_float < 0.4: # Straight Piece values
 		return pieces[0]
-	elif random_float >= 0.4 && random_float < 0.6:
+	elif random_float >= 0.4 && random_float < 0.6: # Corner Piece values
 		return pieces[1]
-	elif random_float >= 0.6 && random_float < 0.8:
+	elif random_float >= 0.6 && random_float < 0.8: # TInt Piece values
 		return pieces[2]
-	else:
+	elif random_float >= 0.8 && random_float < 0.9:
+		return pieces[4]
+	else: # 4Way Piece values
 		return pieces[3]
 
 # Recursively generates the amount of tiles specified in the base case if statement 
@@ -44,7 +46,7 @@ func generateLevel(spawnAtNode: Node3D):
 	#print(("default: "+str(self.position)) if (spawnAtNode == null) else "SpawnNodePos: "+str(spawnAtNode.global_position))
 	for node:Node3D in placedPiece.spawnNodes:
 		#print("NodePos"+str(node.global_position))
-		print("Pos: "+str(node.global_position))
+		#print("Pos: "+str(node.global_position))
 		generateLevel(node)
 
 func _input(event: InputEvent) -> void:
