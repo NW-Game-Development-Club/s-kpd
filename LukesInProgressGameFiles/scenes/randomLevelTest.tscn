@@ -26,6 +26,7 @@ text = "Generate Level"
 [node name="Character" parent="." instance=ExtResource("6_l25i0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35795, 0, 3.46788)
 gravity_scale = 0.0
+isDebugMode = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Character"]
 
