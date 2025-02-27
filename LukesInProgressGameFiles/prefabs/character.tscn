@@ -1,6 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://ensq5srthb1s"]
+[gd_scene load_steps=9 format=3 uid="uid://ensq5srthb1s"]
 
 [ext_resource type="Script" path="res://scripts/characterMovement.gd" id="1_bfpak"]
+[ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="2_5rg2y"]
+[ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="2_pwgyb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ebwuh"]
 
@@ -11,7 +13,10 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_d3746"]
 radius = 0.351076
 
-[node name="Character" type="RigidBody3D" node_paths=PackedStringArray("feet", "label", "character_body")]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5fyc"]
+shader = ExtResource("2_pwgyb")
+
+[node name="Character" type="RigidBody3D" node_paths=PackedStringArray("feet", "label", "character_body") groups=["Player"]]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -53,3 +58,20 @@ shape = SubResource("SphereShape3D_d3746")
 offset_right = 40.0
 offset_bottom = 23.0
 text = "Speed: "
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource("ShaderMaterial_c5fyc")
+custom_minimum_size = Vector2(5, 5)
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -2.5
+offset_top = -2.5
+offset_right = 2.5
+offset_bottom = 2.5
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_5rg2y")
+expand_mode = 2
