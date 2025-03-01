@@ -105,7 +105,7 @@ func round_to_dec(num, digit):
 @export var character_body: Node3D # The character model we should rotate when the camera should rotate
 @onready var camera:Camera3D = get_viewport().get_camera_3d() # The current camera of the scene THIS MIGHT POSE A PROBLEM WITH MULTIPLAYER OR MULTIPLE CAMERAS SO I WILL NEED TO EDIT THIS TOO POTENTIALLY
 func _input(event):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Rotates the view vertically
 		camera.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
 		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -75, 75)

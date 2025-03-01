@@ -77,6 +77,9 @@ shape = SubResource("SphereShape3D_d3746")
 
 [node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell", "itemList")]
 script = ExtResource("5_kk1ge")
+grabRange = null
+inventory = null
+weaponSets = null
 toolShell = NodePath("../Rotation Helper/Camera3D/ToolShell")
 itemList = NodePath("../InventoryPanel/ItemList")
 
@@ -143,7 +146,6 @@ offset_right = 411.5
 offset_bottom = 235.0
 grow_horizontal = 2
 grow_vertical = 2
-allow_reselect = true
 
 [node name="SelectedItemName" type="Label" parent="InventoryPanel"]
 layout_mode = 0
@@ -151,7 +153,7 @@ offset_left = 32.0
 offset_top = 52.0
 offset_right = 298.0
 offset_bottom = 94.0
-text = "Name: "
+text = "Selected Item Name"
 autowrap_mode = 3
 
 [node name="SelectedItemDesc" type="Label" parent="InventoryPanel"]
@@ -160,50 +162,8 @@ offset_left = 48.0
 offset_top = 99.0
 offset_right = 296.0
 offset_bottom = 235.0
-text = "Desciption: "
+text = "Selected Item Description goes here lorem ipsum dolor blah blah stuff typing some stuff so that I can fill up this box... Yeah... Cool."
 label_settings = SubResource("LabelSettings_1tyr3")
 autowrap_mode = 3
 
-[node name="WeaponSet1Label" type="Label" parent="InventoryPanel"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 344.0
-offset_right = 151.0
-offset_bottom = 367.0
-text = "Weapon Set 1: "
-autowrap_mode = 3
-
-[node name="WeaponSet1Value" type="Label" parent="InventoryPanel"]
-layout_mode = 0
-offset_left = 162.0
-offset_top = 345.0
-offset_right = 317.0
-offset_bottom = 367.0
-text = "WeaponName1
-"
-label_settings = SubResource("LabelSettings_1tyr3")
-vertical_alignment = 1
-autowrap_mode = 3
-
-[node name="WeaponSet2Label" type="Label" parent="InventoryPanel"]
-layout_mode = 0
-offset_left = 35.0
-offset_top = 415.0
-offset_right = 151.0
-offset_bottom = 438.0
-text = "Weapon Set 2: "
-autowrap_mode = 3
-
-[node name="WeaponSet2Value" type="Label" parent="InventoryPanel"]
-layout_mode = 0
-offset_left = 162.0
-offset_top = 415.0
-offset_right = 317.0
-offset_bottom = 437.0
-text = "WeaponName2"
-label_settings = SubResource("LabelSettings_1tyr3")
-vertical_alignment = 1
-autowrap_mode = 3
-
-[connection signal="empty_clicked" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemDeselectAll"]
 [connection signal="item_selected" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemSelect"]

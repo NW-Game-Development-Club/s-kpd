@@ -5,6 +5,7 @@ class_name Item
 
 @export var itemName:String # Name of item
 @export_multiline var desciption:String # Description of item
+
 @export var model:Mesh
 
 @export var isInInventory: bool
