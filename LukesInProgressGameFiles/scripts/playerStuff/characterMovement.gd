@@ -25,7 +25,7 @@ func getIsGrounded():
 
 @export var label: Label
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
-	if Input.is_action_just_pressed("toggleDebugFlight"):
+	if Input.is_action_just_pressed("toggle_debug_flight"):
 		isDebugMode = !isDebugMode
 		print("Debug flight "+ ("Activated!" if isDebugMode else "Deactivated!"))
 	if gravity_scale != 0 if isDebugMode else 1:

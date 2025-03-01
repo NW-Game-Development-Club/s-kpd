@@ -1,17 +1,21 @@
-[gd_scene load_steps=12 format=3 uid="uid://ensq5srthb1s"]
+[gd_scene load_steps=14 format=3 uid="uid://ensq5srthb1s"]
 
 [ext_resource type="Script" path="res://scripts/playerStuff/characterMovement.gd" id="1_bfpak"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="1_k8g4o"]
 [ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="2_5rg2y"]
 [ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="2_6g4ha"]
 [ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="2_pwgyb"]
-[ext_resource type="Script" path="res://scripts/playerStuff/inventoryHandler.gd" id="5_kk1ge"]
+[ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="3_b4swr"]
+[ext_resource type="Script" path="res://prefabs/inventoryHandler.gd" id="5_kk1ge"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ebwuh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e7rta"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_385ov"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_jbqiy"]
+size = Vector3(0.1, 0.3, 1)
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d3746"]
 radius = 0.351076
@@ -54,12 +58,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00278914, 0)
 spot_range = 20.0
 
 [node name="ToolShell" type="Node3D" parent="Rotation Helper/Camera3D" node_paths=PackedStringArray("firePoint")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489744, 0, -1.04913)
 script = ExtResource("2_6g4ha")
+equippedTool = ExtResource("3_b4swr")
 firePoint = NodePath("MeshInstance3D/FirePoint")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Rotation Helper/Camera3D/ToolShell"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.489744, -0.431009, -1.04913)
-skeleton = NodePath("")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.431009, 0)
+mesh = SubResource("BoxMesh_jbqiy")
 
 [node name="FirePoint" type="Node3D" parent="Rotation Helper/Camera3D/ToolShell/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
@@ -69,9 +75,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Feet"]
 shape = SubResource("SphereShape3D_d3746")
 
-[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell")]
+[node name="InventoryHandler" type="Node3D" parent="."]
 script = ExtResource("5_kk1ge")
-toolShell = NodePath("../Rotation Helper/Camera3D/ToolShell")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0

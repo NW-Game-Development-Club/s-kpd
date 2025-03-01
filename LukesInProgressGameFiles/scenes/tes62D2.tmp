@@ -1,8 +1,8 @@
-[gd_scene load_steps=12 format=3 uid="uid://da1xfp6o3spos"]
+[gd_scene load_steps=13 format=3 uid="uid://da1xfp6o3spos"]
 
 [ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="1_1sefh"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
-[ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
+[ext_resource type="Script" path="res://scripts/worldItem.gd" id="3_6tk5y"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
@@ -26,6 +26,8 @@ flip_faces = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_juvfy"]
 size = Vector3(46.1174, 31.8077, 58.9938)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2b05v"]
 
 [node name="TestLevel" type="Node3D"]
 
@@ -106,5 +108,12 @@ gravity = 0.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.89088, 15.4039, 2.4509)
 shape = SubResource("BoxShape3D_juvfy")
 
-[node name="itemShell" parent="." instance=ExtResource("3_sn03i")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92192, -4.29698)
+[node name="itemShell2" type="RigidBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("3_6tk5y")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="itemShell2"]
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="itemShell2"]
+shape = SubResource("CapsuleShape3D_2b05v")

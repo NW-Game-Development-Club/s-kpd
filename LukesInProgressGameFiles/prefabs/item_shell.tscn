@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://byxg4e0k0cuym"]
+
+[ext_resource type="Script" path="res://scripts/worldItem.gd" id="1_ydytw"]
+[ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="2_hq20h"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_2b05v"]
+
+[node name="itemShell" type="RigidBody3D" groups=["items"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+script = ExtResource("1_ydytw")
+equippedTool = ExtResource("2_hq20h")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1.19249e-08, 1, 0, -1, 1.19249e-08, 0, 0, 0)
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_2b05v")

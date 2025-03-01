@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Gun" load_steps=3 format=3 uid="uid://deyphsaiyuifx"]
+
+[ext_resource type="Script" path="res://scripts/classes/itemClasses/toolClasses/Gun.gd" id="1_lg2s7"]
+
+[sub_resource type="TorusMesh" id="TorusMesh_rkkom"]
+lightmap_size_hint = Vector2i(33, 9)
+outer_radius = 0.418
+
+[resource]
+script = ExtResource("1_lg2s7")
+weaponDetectionType = 0
+raycastRange = 100.0
+damage = 10
+knockbackForce = 5.0
+fireRate = 1000.0
+isContinuousFire = false
+clipSize = 5.0
+reloadTime = 0.0
+isCustomReloadAmount = false
+reloadAmount = 0
+isEquipped = false
+itemName = "Generic Undoer of Niceties"
+desciption = "Very generic and even more punctual!"
+model = SubResource("TorusMesh_rkkom")
+isInInventory = false

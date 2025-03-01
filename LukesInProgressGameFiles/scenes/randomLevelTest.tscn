@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://cnai622jgu4j7"]
 
-[ext_resource type="Script" path="res://scripts/level_generator.gd" id="1_46sns"]
+[ext_resource type="Script" path="res://scripts/levelStuff/level_generator.gd" id="1_46sns"]
 [ext_resource type="PackedScene" uid="uid://bc7h4gl8yqj3k" path="res://prefabs/parts/straight_piece.tscn" id="2_fj5d4"]
 [ext_resource type="PackedScene" uid="uid://enltvhwyml0v" path="res://prefabs/parts/corner_piece.tscn" id="3_h7gme"]
 [ext_resource type="PackedScene" uid="uid://b85biewuwnolt" path="res://prefabs/parts/t_int_piece.tscn" id="4_6hfd3"]
@@ -27,7 +27,6 @@ amtOfPiecesToSpawn = 100
 
 [node name="Character" parent="." instance=ExtResource("6_l25i0")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35795, 0, 3.46788)
-isDebugMode = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(11.0996, 0, 0, 0, 1, 0, 0, 0, 1.7661, 0, 6.51303, -10.9996)

@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://enltvhwyml0v"]
 
-[ext_resource type="Script" path="res://scripts/Tile.gd" id="1_xxek3"]
+[ext_resource type="Script" path="res://scripts/classes/Tile.gd" id="1_xxek3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_35coj"]
 
