@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://da1xfp6o3spos"]
+[gd_scene load_steps=14 format=3 uid="uid://da1xfp6o3spos"]
 
 [ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="1_1sefh"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
 [ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
 [ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="4_w6fcp"]
+[ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
@@ -110,3 +111,7 @@ shape = SubResource("BoxShape3D_juvfy")
 [node name="itemShell" parent="." instance=ExtResource("3_sn03i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.92192, -4.29698)
 item = ExtResource("4_w6fcp")
+
+[node name="itemShell2" parent="." instance=ExtResource("3_sn03i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03137, 1.92192, -3.72409)
+item = ExtResource("5_yov0m")

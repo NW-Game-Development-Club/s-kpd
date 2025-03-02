@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="Gun" load_steps=4 format=3 uid="uid://cpmamxdhi2ab7"]
+
+[ext_resource type="Script" path="res://scripts/classes/itemClasses/toolClasses/Gun.gd" id="1_4wfn0"]
+[ext_resource type="PackedScene" uid="uid://bdajiksij64kt" path="res://prefabs/bullet.tscn" id="1_a7qb1"]
+
+[sub_resource type="PrismMesh" id="PrismMesh_boxdy"]
+
+[resource]
+script = ExtResource("1_4wfn0")
+weaponDetectionType = 1
+raycastRange = 100.0
+projectilePrefab = ExtResource("1_a7qb1")
+damage = 10
+knockbackForce = 5.0
+fireRate = 0.5
+isContinuousFire = false
+clipSize = 0.0
+reloadTime = 0.0
+isCustomReloadAmount = false
+reloadAmount = 0
+isEquipped = false
+itemName = "Projecting Issues"
+desciption = "A projectile based weapon!"
+model = SubResource("PrismMesh_boxdy")
+isInInventory = false

@@ -82,10 +82,13 @@ func _input(event):
 			
 
 	if event.is_action_pressed("equip_weapon"):
-		if toolShell.equippedTool == null:
-			toolShell.equip(weaponSets[currentWeaponSet])
-		else:
-			toolShell.unequip()
+		if weaponSets && weaponSets.size() > 0:
+			if toolShell.equippedTool == null:
+				toolShell.equip(weaponSets[currentWeaponSet])
+			else:
+				toolShell.unequip()
+		else: 
+			print("No weapons equipped")
 			
 	if event.is_action_pressed("open_inventory"):
 		loadInventory()
