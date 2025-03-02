@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://ensq5srthb1s"]
+[gd_scene load_steps=15 format=3 uid="uid://ensq5srthb1s"]
 
 [ext_resource type="Script" path="res://scripts/playerStuff/characterMovement.gd" id="1_bfpak"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="1_k8g4o"]
 [ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="2_5rg2y"]
 [ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="2_6g4ha"]
 [ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="2_pwgyb"]
+[ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="5_dbivr"]
 [ext_resource type="Script" path="res://scripts/playerStuff/inventoryHandler.gd" id="5_kk1ge"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ebwuh"]
@@ -75,10 +76,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Feet"]
 shape = SubResource("SphereShape3D_d3746")
 
-[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell", "itemList")]
+[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell", "itemList", "selectedItemNameBox", "selectedItemDescBox", "weaponSet1Box", "weaponSet2Box", "dropButton")]
 script = ExtResource("5_kk1ge")
 toolShell = NodePath("../Rotation Helper/Camera3D/ToolShell")
+worldItemPrefab = ExtResource("5_dbivr")
 itemList = NodePath("../InventoryPanel/ItemList")
+selectedItemNameBox = NodePath("../InventoryPanel/SelectedItemName")
+selectedItemDescBox = NodePath("../InventoryPanel/SelectedItemDesc")
+weaponSet1Box = NodePath("../InventoryPanel/WeaponSetData/WeaponSet1Value")
+weaponSet2Box = NodePath("../InventoryPanel/WeaponSetData/WeaponSet2Value")
+dropButton = NodePath("../InventoryPanel/DropButton")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
@@ -145,27 +152,50 @@ grow_horizontal = 2
 grow_vertical = 2
 allow_reselect = true
 
-[node name="SelectedItemName" type="Label" parent="InventoryPanel"]
+[node name="Title_SelectedItemName" type="Label" parent="InventoryPanel"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 52.0
-offset_right = 298.0
-offset_bottom = 94.0
+offset_right = 93.0
+offset_bottom = 79.0
 text = "Name: "
+autowrap_mode = 3
+
+[node name="SelectedItemName" type="Label" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = 123.0
+offset_top = 56.0
+offset_right = 302.0
+offset_bottom = 94.0
+text = "Name of item"
+label_settings = SubResource("LabelSettings_1tyr3")
+autowrap_mode = 3
+
+[node name="Title_SelectedItemDesc" type="Label" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 99.0
+offset_right = 121.0
+offset_bottom = 137.0
+text = "Desciption: "
 autowrap_mode = 3
 
 [node name="SelectedItemDesc" type="Label" parent="InventoryPanel"]
 layout_mode = 0
-offset_left = 48.0
-offset_top = 99.0
-offset_right = 296.0
+offset_left = 124.0
+offset_top = 104.0
+offset_right = 298.0
 offset_bottom = 235.0
-text = "Desciption: "
+text = "Description of item"
 label_settings = SubResource("LabelSettings_1tyr3")
 autowrap_mode = 3
 
-[node name="WeaponSet1Label" type="Label" parent="InventoryPanel"]
-layout_mode = 0
+[node name="WeaponSetData" type="Control" parent="InventoryPanel"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="WeaponSet1Label" type="Label" parent="InventoryPanel/WeaponSetData"]
 offset_left = 35.0
 offset_top = 344.0
 offset_right = 151.0
@@ -173,8 +203,7 @@ offset_bottom = 367.0
 text = "Weapon Set 1: "
 autowrap_mode = 3
 
-[node name="WeaponSet1Value" type="Label" parent="InventoryPanel"]
-layout_mode = 0
+[node name="WeaponSet1Value" type="Label" parent="InventoryPanel/WeaponSetData"]
 offset_left = 162.0
 offset_top = 345.0
 offset_right = 317.0
@@ -185,8 +214,7 @@ label_settings = SubResource("LabelSettings_1tyr3")
 vertical_alignment = 1
 autowrap_mode = 3
 
-[node name="WeaponSet2Label" type="Label" parent="InventoryPanel"]
-layout_mode = 0
+[node name="WeaponSet2Label" type="Label" parent="InventoryPanel/WeaponSetData"]
 offset_left = 35.0
 offset_top = 415.0
 offset_right = 151.0
@@ -194,8 +222,7 @@ offset_bottom = 438.0
 text = "Weapon Set 2: "
 autowrap_mode = 3
 
-[node name="WeaponSet2Value" type="Label" parent="InventoryPanel"]
-layout_mode = 0
+[node name="WeaponSet2Value" type="Label" parent="InventoryPanel/WeaponSetData"]
 offset_left = 162.0
 offset_top = 415.0
 offset_right = 317.0
@@ -205,5 +232,15 @@ label_settings = SubResource("LabelSettings_1tyr3")
 vertical_alignment = 1
 autowrap_mode = 3
 
+[node name="DropButton" type="Button" parent="InventoryPanel"]
+layout_mode = 0
+offset_left = 87.0
+offset_top = 255.0
+offset_right = 238.0
+offset_bottom = 283.0
+disabled = true
+text = "Drop Selected Item"
+
 [connection signal="empty_clicked" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemDeselectAll"]
 [connection signal="item_selected" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemSelect"]
+[connection signal="pressed" from="InventoryPanel/DropButton" to="InventoryHandler" method="_on_drop_button_pressed"]
