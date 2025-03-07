@@ -1,10 +1,11 @@
-[gd_scene load_steps=14 format=3 uid="uid://da1xfp6o3spos"]
+[gd_scene load_steps=15 format=3 uid="uid://da1xfp6o3spos"]
 
 [ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="1_1sefh"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
 [ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
 [ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="4_w6fcp"]
 [ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
+[ext_resource type="PackedScene" uid="uid://2gnjkdtykap2" path="res://prefabs/ship.tscn" id="6_kh8fr"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
@@ -33,6 +34,7 @@ size = Vector3(46.1174, 31.8077, 58.9938)
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(3.12415, 0, 0, 0, 1, 0, 0, 0, 2.65693, 0, 0, 0)
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.807935, 0, -10.7857)
@@ -45,6 +47,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_6gdxk")
 
 [node name="Table" type="StaticBody3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971017, -16.3911)
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.741869, 0, -0.503229)
@@ -65,6 +68,7 @@ shadow_enabled = true
 
 [node name="Floor2" type="StaticBody3D" parent="."]
 transform = Transform3D(3.12415, 0, 0, 0, 1, 0, 0, 0, 2.65693, 45.7471, 0, 0)
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.807935, 0, -10.7857)
@@ -76,6 +80,7 @@ skeleton = NodePath("../..")
 
 [node name="Table" type="StaticBody3D" parent="Floor2"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971017, -16.3911)
+collision_layer = 3
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Floor2/Table"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.629563, 0, 1.16034)
@@ -88,6 +93,7 @@ skeleton = NodePath("../..")
 
 [node name="Box" type="RigidBody3D" parent="." groups=["damagable"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.20737, -34.7698)
+collision_layer = 3
 script = ExtResource("2_davto")
 maxHealth = 20
 
@@ -115,3 +121,6 @@ item = ExtResource("4_w6fcp")
 [node name="itemShell2" parent="." instance=ExtResource("3_sn03i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.03137, 1.92192, -3.72409)
 item = ExtResource("5_yov0m")
+
+[node name="Ship" parent="." instance=ExtResource("6_kh8fr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7213, 2.00562, -27.0503)

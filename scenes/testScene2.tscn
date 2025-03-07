@@ -1,0 +1,50 @@
+[gd_scene load_steps=7 format=3 uid="uid://xsrca6lwkb25"]
+
+[ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="1_scvhw"]
+[ext_resource type="PackedScene" uid="uid://2gnjkdtykap2" path="res://prefabs/ship.tscn" id="2_d7cdu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_8b6qo"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6yc8o"]
+size = Vector3(100, 1, 100)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uxujd"]
+size = Vector3(2.58301, 1, 2.66504)
+
+[sub_resource type="BoxMesh" id="BoxMesh_o3ikq"]
+size = Vector3(14.635, 1, 22.165)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Floor" type="StaticBody3D" parent="." groups=["map"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("BoxMesh_8b6qo")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_6yc8o")
+
+[node name="Table" type="StaticBody3D" parent="Floor" groups=["map"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.971017, -16.3911)
+collision_layer = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/Table"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.741869, 0, -0.503229)
+shape = SubResource("BoxShape3D_uxujd")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor/Table/CollisionShape3D"]
+transform = Transform3D(0.173729, 0, 0, 0, 1, 0, 0, 0, 0.119035, 0, 0, 0)
+mesh = SubResource("BoxMesh_o3ikq")
+skeleton = NodePath("../..")
+
+[node name="BetterCharacter" parent="Floor" instance=ExtResource("1_scvhw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.939582, 0.690476, -1.18892)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.789674, -0.492225, 0.366239, -0.52366, -0.229707, 0.820375, -0.319681, -0.839613, -0.439152, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Ship" parent="." instance=ExtResource("2_d7cdu")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3648, 1.32894, -20.3287)

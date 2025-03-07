@@ -28,6 +28,7 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if Input.is_action_just_pressed("toggle_debug_flight"):
 		isDebugMode = !isDebugMode
 		print("Debug flight "+ ("Activated!" if isDebugMode else "Deactivated!"))
+	
 	if gravity_scale != 0 if isDebugMode else 1:
 		gravity_scale = 0 if isDebugMode else 1 # THIS MIGHT BE A BIT JANKY IN LEVELS SO BE CAREFUL
 	
@@ -42,62 +43,71 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		move_direction.z += 1
 	if Input.is_action_pressed("move_forward"):
 		move_direction.z -= 1
-	
-	var target_velocity = Vector3.ZERO # Temp ver for storing the velocity we will add to the character
-	
-	# If we are holding some move buttons, calculate velocity
-	if move_direction != Vector3.ZERO:
-		move_direction = move_direction.normalized()
-		# Update target velocity
-		target_velocity.x = move_direction.x
-		target_velocity.z = move_direction.z 
 		
-		# 10 is multiplied onto the speed so that we have prettier speed numbers than "20"
-		target_velocity = target_velocity * speed * (sprintMultiplier if Input.is_action_pressed("sprint") else 1) * 10
+	if currentVehicle == null:
+		var target_velocity = Vector3.ZERO # Temp ver for storing the velocity we will add to the character
 		
-		# Rotate target velocity so that it is relative to the players look dir
-		target_velocity = target_velocity.rotated(Vector3(0,1,0), character_body.basis.get_euler().y)
+		# If we are holding some move buttons, calculate velocity
+		if move_direction != Vector3.ZERO:
+			move_direction = move_direction.normalized()
+			# Update target velocity
+			target_velocity.x = move_direction.x
+			target_velocity.z = move_direction.z 
 			
-	# Use Ground movement if there is gravity && not debug mode, and EVA movement if there is no gravity
-	if state.total_gravity.y != 0 && !isDebugMode:
-		# Apply ground movement unless we are off the ground
-		if getIsGrounded():
-			# Apply some dampening to make movement more snappy and limit speed
-			self.linear_damp = 2
-			state.apply_force(target_velocity)
-			if Input.is_action_pressed("jump"):
-				if linear_velocity.y < 7:
-					linear_velocity.y = 7
-				else:
-					# This is so that we can jump on upward moving platforms
-					linear_velocity.y += 7
-		else:
-			# Remove dampening if we are in the air so that we keep constant linear velocity in the air
-			self.linear_damp = 0
+			# 10 is multiplied onto the speed so that we have prettier speed numbers than "20"
+			target_velocity = target_velocity * speed * (sprintMultiplier if Input.is_action_pressed("sprint") else 1) * 10
 			
-	else:
-		if !isDebugMode:
-			if self.linear_damp != 0:
+			# Rotate target velocity so that it is relative to the players look dir
+			target_velocity = target_velocity.rotated(Vector3(0,1,0), character_body.basis.get_euler().y)
+			
+		# Use Ground movement if there is gravity && not debug mode, and EVA movement if there is no gravity
+		if state.total_gravity.y != 0 && !isDebugMode:
+			# Apply ground movement unless we are off the ground
+			if getIsGrounded():
+				# Apply some dampening to make movement more snappy and limit speed
+				self.linear_damp = 2
+				state.apply_force(target_velocity)
+				if Input.is_action_pressed("jump"):
+					if linear_velocity.y < 7:
+						linear_velocity.y = 7
+					else:
+						# This is so that we can jump on upward moving platforms
+						linear_velocity.y += 7
+			else:
+				# Remove dampening if we are in the air so that we keep constant linear velocity in the air
 				self.linear_damp = 0
-			# EVA WIP movement for when there is zero gravity
-			state.apply_force(target_velocity * 0.2)
-			if Input.is_action_pressed("jump"):
-				state.apply_force(Vector3.UP * speed)
-			if Input.is_action_pressed("crouch"):
-				state.apply_force(Vector3.DOWN * speed)
+				
 		else:
-			if self.linear_damp != 1:
-				self.linear_damp = 1
-			state.linear_velocity = target_velocity * 0.8
-			if Input.is_action_pressed("jump"):
-				state.linear_velocity.y =  speed * 10 * 0.8
-			if Input.is_action_pressed("crouch"):
-				state.linear_velocity.y = -speed * 10 * 0.8
-		
+			if !isDebugMode:
+				if self.linear_damp != 0:
+					self.linear_damp = 0
+				# EVA WIP movement for when there is zero gravity
+				state.apply_force(target_velocity * 0.2)
+				if Input.is_action_pressed("jump"):
+					state.apply_force(Vector3.UP * speed)
+				if Input.is_action_pressed("crouch"):
+					state.apply_force(Vector3.DOWN * speed)
+			else:
+				if self.linear_damp != 1:
+					self.linear_damp = 1
+				state.linear_velocity = target_velocity * 0.8
+				if Input.is_action_pressed("jump"):
+					state.linear_velocity.y =  speed * 10 * 0.8
+				if Input.is_action_pressed("crouch"):
+					state.linear_velocity.y = -speed * 10 * 0.8
+	else:
+		currentVehicle.linear_velocity = (move_direction * currentVehicle.speed)
+		var changeInPos = currentVehicle.global_position - lastPos
+		position += changeInPos
+		lastPos = currentVehicle.global_position
+		#translate(move_direction)
 	#label.text = "Speed: "+str(round_to_dec(state.linear_velocity.length(), 2))
 	#label.text = "Speed: "+str(Vector3(round_to_dec(state.linear_velocity.x,2),round_to_dec(state.linear_velocity.y,2),round_to_dec(state.linear_velocity.z,2)))
 	label.text = "Gravity: "+str(state.total_gravity)
+	if currentVehicle:
+		currentVehicle.rotation.move_toward(Vector3.ZERO, 100)
 	
+var lastPos:Vector3
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
@@ -112,3 +122,10 @@ func _input(event):
 		
 		# Rotates the view horizontally
 		character_body.rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
+
+var currentVehicle: Ship
+func pilotVehicle(ship):
+	self.reparent(ship)
+	currentVehicle = ship
+	lastPos = currentVehicle.global_position
+	

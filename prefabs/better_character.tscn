@@ -1,12 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://ensq5srthb1s"]
+[gd_scene load_steps=15 format=3 uid="uid://3mcgdp8sij0t"]
 
-[ext_resource type="Script" path="res://scripts/playerStuff/characterMovement.gd" id="1_bfpak"]
-[ext_resource type="Script" path="res://scripts/healthHandler.gd" id="1_k8g4o"]
-[ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="2_5rg2y"]
-[ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="2_6g4ha"]
-[ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="2_pwgyb"]
-[ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="5_dbivr"]
-[ext_resource type="Script" path="res://scripts/playerStuff/inventoryHandler.gd" id="5_kk1ge"]
+[ext_resource type="Script" path="res://scripts/playerStuff/betterCharacterMovement.gd" id="1_etma0"]
+[ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_4dlv8"]
+[ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="3_u2eap"]
+[ext_resource type="Script" path="res://scripts/playerStuff/inventoryHandler.gd" id="4_ptu0e"]
+[ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="5_sxtkr"]
+[ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="6_xenc2"]
+[ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="7_vav8e"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ebwuh"]
 
@@ -18,7 +18,7 @@
 radius = 0.351076
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5fyc"]
-shader = ExtResource("2_pwgyb")
+shader = ExtResource("6_xenc2")
 
 [sub_resource type="LabelSettings" id="LabelSettings_v0apu"]
 font_size = 20
@@ -26,27 +26,28 @@ font_size = 20
 [sub_resource type="LabelSettings" id="LabelSettings_1tyr3"]
 font_size = 12
 
-[node name="Character" type="RigidBody3D" node_paths=PackedStringArray("feet", "label", "character_body") groups=["Player"]]
+[node name="BetterCharacter" type="CharacterBody3D" node_paths=PackedStringArray("label", "character_rot_helper") groups=["Player"]]
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
-can_sleep = false
-script = ExtResource("1_bfpak")
-feet = NodePath("Feet")
+platform_on_leave = 2
+platform_floor_layers = 4294967292
+script = ExtResource("1_etma0")
 label = NodePath("Label")
-character_body = NodePath("Rotation Helper")
+character_rot_helper = NodePath("Rotation Helper")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="MainCollider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02571, 0)
 shape = SubResource("CapsuleShape3D_ebwuh")
-script = ExtResource("1_k8g4o")
+script = ExtResource("2_4dlv8")
+maxHealth = 100
 
 [node name="Rotation Helper" type="Node3D" parent="."]
 
 [node name="BodyMesh" type="MeshInstance3D" parent="Rotation Helper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.02571, 0)
 mesh = SubResource("CapsuleMesh_e7rta")
-skeleton = NodePath("../../CollisionShape3D")
+skeleton = NodePath("../../MainCollider")
 
 [node name="EyeMesh" type="MeshInstance3D" parent="Rotation Helper/BodyMesh"]
 transform = Transform3D(0.801884, 0, 0, 0, 0.198757, 0, 0, 0, 0.534432, 0, 0.49705, -0.286436)
@@ -55,6 +56,7 @@ skeleton = NodePath("../../Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="Rotation Helper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52276, 0)
+current = true
 near = 0.3
 
 [node name="SpotLight3D" type="SpotLight3D" parent="Rotation Helper/Camera3D"]
@@ -62,7 +64,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.00278914, 0)
 spot_range = 20.0
 
 [node name="ToolShell" type="Node3D" parent="Rotation Helper/Camera3D" node_paths=PackedStringArray("firePoint")]
-script = ExtResource("2_6g4ha")
+script = ExtResource("3_u2eap")
 firePoint = NodePath("MeshInstance3D/FirePoint")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Rotation Helper/Camera3D/ToolShell"]
@@ -78,9 +80,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
 shape = SubResource("SphereShape3D_d3746")
 
 [node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell", "itemList", "selectedItemNameBox", "selectedItemDescBox", "weaponSet1Box", "weaponSet2Box", "dropButton")]
-script = ExtResource("5_kk1ge")
+script = ExtResource("4_ptu0e")
 toolShell = NodePath("../Rotation Helper/Camera3D/ToolShell")
-worldItemPrefab = ExtResource("5_dbivr")
+worldItemPrefab = ExtResource("5_sxtkr")
 itemList = NodePath("../InventoryPanel/ItemList")
 selectedItemNameBox = NodePath("../InventoryPanel/SelectedItemName")
 selectedItemDescBox = NodePath("../InventoryPanel/SelectedItemDesc")
@@ -107,7 +109,7 @@ offset_right = 2.5
 offset_bottom = 2.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_5rg2y")
+texture = ExtResource("7_vav8e")
 expand_mode = 2
 
 [node name="InventoryPanel" type="Panel" parent="."]

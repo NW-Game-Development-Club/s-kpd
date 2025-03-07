@@ -24,6 +24,8 @@ extends Node3D
 var currentWeaponSet: int = 0
 var selectedItem: Item
 
+@onready var parent = self.get_parent()
+
 func loadInventory():
 	itemList.clear()
 	for item:Item in inventory:
@@ -96,19 +98,27 @@ func _input(event):
 		var query = PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position + fireDirection)
 		var result = space_state.intersect_ray(query)
 		
-		if result && result.collider.is_in_group("items"):
-			var pickedTool:Item = result.collider.item
-			inventory.append(pickedTool)
-			print("Picked up "+pickedTool.itemName)
-			pickedTool.isInInventory = true
-			
-			if weaponSets.size() == 0 and pickedTool is Tool:
-				weaponSets.append(pickedTool)
-				weaponSet1Box.text = weaponSets[0].itemName
-				print("Added to weapon set: "+ str(pickedTool.itemName))
-				
-			# Call the world item to do its pick up stuff such as hiding itself
-			result.collider.onPickup(self)
+		if result:
+			if parent.currentVehicle == null:
+				if result.collider.is_in_group("items"):
+					var pickedTool:Item = result.collider.item
+					inventory.append(pickedTool)
+					print("Picked up "+pickedTool.itemName)
+					pickedTool.isInInventory = true
+					
+					if weaponSets.size() == 0 and pickedTool is Tool:
+						weaponSets.append(pickedTool)
+						weaponSet1Box.text = weaponSets[0].itemName
+						print("Added to weapon set: "+ str(pickedTool.itemName))
+						
+					# Call the world item to do its pick up stuff such as hiding itself
+					result.collider.onPickup(self)
+				elif result.collider is Ship:
+					result.collider.setPilot(parent)
+					parent.pilotVehicle(result.collider)
+			else:
+				parent.currentVehicle.unPilot()
+				parent.currentVehicle = null
 		
 	if event.is_action_pressed("equip_weapon"):
 		if weaponSets && weaponSets.size() > 0:
@@ -129,7 +139,12 @@ func dropItem(item:Item):
 	droppedItem.global_position = camera.global_position - camera.global_transform.basis.z
 	
 	inventory.remove_at(inventory.find(selectedItem))
-	weaponSets.remove_at(weaponSets.find(selectedItem))
+	
+	var weaponSetIndex = weaponSets.find(selectedItem)
+	# Remove dropped item from weapon set if it is in it
+	if weaponSetIndex != -1:
+		weaponSets.remove_at(weaponSetIndex)
+	
 	loadInventory()
 	changeSelectionDisplays()
 
