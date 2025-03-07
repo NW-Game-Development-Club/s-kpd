@@ -23,8 +23,8 @@ func _physics_process(delta: float) -> void:
 		if maybeFloor.get_collider() != self.get_parent() and (maybeFloor.get_collider().is_in_group("ship") or maybeFloor.get_collider().is_in_group("map")):
 			self.reparent(maybeFloor.get_collider())
 		self.up_direction = $"Rotation Helper".global_basis.y
-		if (self.rotation != Vector3.ZERO):
-			self.rotation = Vector3.ZERO
+	if (self.rotation != Vector3.ZERO):
+		self.rotation = Vector3.ZERO
 	
 	if currentVehicle == null:
 		if Input.is_action_just_pressed("toggle_debug_flight"):
