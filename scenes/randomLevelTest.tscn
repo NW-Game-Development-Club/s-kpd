@@ -5,8 +5,8 @@
 [ext_resource type="PackedScene" uid="uid://enltvhwyml0v" path="res://prefabs/parts/corner_piece.tscn" id="3_h7gme"]
 [ext_resource type="PackedScene" uid="uid://b85biewuwnolt" path="res://prefabs/parts/t_int_piece.tscn" id="4_6hfd3"]
 [ext_resource type="PackedScene" uid="uid://bg66aumssuwo7" path="res://prefabs/parts/4_way_piece.tscn" id="5_7odpp"]
-[ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="6_l25i0"]
 [ext_resource type="PackedScene" uid="uid://otkaa5q4fxyc" path="res://prefabs/parts/stair_down_piece.tscn" id="6_opbp4"]
+[ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="7_6h4mc"]
 
 [sub_resource type="Environment" id="Environment_qfbsy"]
 background_energy_multiplier = 0.75
@@ -25,9 +25,10 @@ script = ExtResource("1_46sns")
 pieces = Array[PackedScene]([ExtResource("2_fj5d4"), ExtResource("3_h7gme"), ExtResource("4_6hfd3"), ExtResource("5_7odpp"), ExtResource("6_opbp4")])
 amtOfPiecesToSpawn = 100
 
-[node name="Character" parent="." instance=ExtResource("6_l25i0")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.35795, 0, 3.46788)
-
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(11.0996, 0, 0, 0, 1, 0, 0, 0, 1.7661, 0, 6.51303, -10.9996)
 mesh = SubResource("BoxMesh_5kxnl")
+
+[node name="BetterCharacter" parent="." instance=ExtResource("7_6h4mc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0709144, 0, 2.00914)
+isDebugMode = true
