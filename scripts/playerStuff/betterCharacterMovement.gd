@@ -94,7 +94,10 @@ func _physics_process(delta: float) -> void:
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
+	if (GlobalVariables.captureMouse == true):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # Unlocks mouse
 
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
