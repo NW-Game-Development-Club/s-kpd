@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://dn1xlwt1id0lc"]
+
+[ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="1_56vg4"]
+[ext_resource type="Script" path="res://scripts/asteroid_spawn.gd" id="2_krqkh"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_535uk"]
+radius = 1.0
+height = 2.0
+
+[node name="Node3D" type="Node3D"]
+
+[node name="BetterCharacter" parent="." instance=ExtResource("1_56vg4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0628027, 0, 4.98757)
+isDebugMode = true
+
+[node name="AsteroidSpawn" type="Node3D" parent="."]
+script = ExtResource("2_krqkh")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="AsteroidSpawn"]
+mesh = SubResource("SphereMesh_535uk")

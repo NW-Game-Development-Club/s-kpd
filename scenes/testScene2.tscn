@@ -18,7 +18,6 @@ size = Vector3(14.635, 1, 22.165)
 [node name="Node3D" type="Node3D"]
 
 [node name="Floor" type="StaticBody3D" parent="." groups=["map"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("BoxMesh_8b6qo")

@@ -26,6 +26,7 @@ func _physics_process(delta: float) -> void:
 		if (self.rotation != Vector3.ZERO):
 			self.rotation = Vector3.ZERO
 	
+	# Normal Movement
 	if currentVehicle == null:
 		if Input.is_action_just_pressed("toggle_debug_flight"):
 			isDebugMode = !isDebugMode
@@ -74,19 +75,21 @@ func _physics_process(delta: float) -> void:
 			velocity.y = 0
 		
 		move_and_slide()
+	# Ship Movement
 	else:
 		var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-		var direction := (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
-		direction = direction.rotated(currentVehicle.basis.y, currentVehicle.basis.get_euler().y)
-		
+		var direction := (currentVehicle.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if Input.is_action_pressed("jump"):
 			direction.y = 1
 		elif Input.is_action_pressed("crouch"):
 			direction.y = -1
-		else:
-			direction.y = 0
+		#else:
+			#direction.y = 0
+		#direction = direction.rotated(currentVehicle.basis.y, currentVehicle.basis.get_euler().y)
+		
+		
 			
-		currentVehicle.apply_force(direction * currentVehicle.speed, self.position)
+		currentVehicle.apply_central_force(direction * currentVehicle.speed)
 	#label.text = str(velocity if currentVehicle == null else currentVehicle.linear_velocity)
 	label.text = "Self: "+str(velocity) + ("Parent: "+ str(get_parent().linear_velocity) if get_parent() is RigidBody3D else "")
 	#label.text = str(self.get_gravity())
@@ -106,8 +109,8 @@ func _input(event):
 	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if currentVehicle:
 			print(str(currentVehicle.rotation_degrees))
-			var horizTorque := Vector3(0, deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -100), 0)
-			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -100),0,0).rotated(Vector3(0,1,0), currentVehicle.basis.get_euler().y)
+			var horizTorque := Vector3(0, deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -100), 0) * currentVehicle.global_basis
+			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -100),0,0).rotated(currentVehicle.global_basis.y, currentVehicle.basis.get_euler().y)
 			
 			# Rotates the ship
 			currentVehicle.apply_torque(horizTorque + vertTorque)
