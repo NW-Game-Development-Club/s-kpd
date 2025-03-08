@@ -15,12 +15,22 @@ run/main_scene="res://scenes/testLevel.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://sprites/icon.svg"
 
+[autoload]
+
+GlobalVariables="*res://scripts/globalVariables.gd"
+
 [global_group]
 
 Player=""
 items="items that can be picked up by the player"
 ship=""
 map=""
+
+[importer_defaults]
+
+animation_library={
+"animation/fps": 60.0
+}
 
 [input]
 
