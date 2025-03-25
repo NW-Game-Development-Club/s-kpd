@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://da1xfp6o3spos"]
+[gd_scene load_steps=16 format=3 uid="uid://da1xfp6o3spos"]
 
 [ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="1_1sefh"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
@@ -6,6 +6,7 @@
 [ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="4_w6fcp"]
 [ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
 [ext_resource type="PackedScene" uid="uid://2gnjkdtykap2" path="res://prefabs/ship.tscn" id="6_kh8fr"]
+[ext_resource type="Script" path="res://scripts/botMechanics/stateMachine.gd" id="7_yvm3x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
@@ -124,3 +125,9 @@ item = ExtResource("5_yov0m")
 
 [node name="Ship" parent="." instance=ExtResource("6_kh8fr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7213, 2.00562, -27.0503)
+script = ExtResource("7_yvm3x")
+current_state = 0
+target = null
+force = 100
+max_speed = 100
+idle_max_speed_ratio = 0.5
