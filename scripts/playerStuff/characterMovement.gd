@@ -104,9 +104,8 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		position += changeInPos
 		lastPos = currentVehicle.global_position
 		#translate(move_direction)
-	#label.text = "Speed: "+str(round_to_dec(state.linear_velocity.length(), 2))
-	#label.text = "Speed: "+str(Vector3(round_to_dec(state.linear_velocity.x,2),round_to_dec(state.linear_velocity.y,2),round_to_dec(state.linear_velocity.z,2)))
-	label.text = "Gravity: "+str(state.total_gravity)
+	label.text = "Gravity: " + str(state.total_gravity) + " Velocity: " + str(state.linear_velocity) + " Position: " + str(state.transform.origin)
+
 	if currentVehicle:
 		currentVehicle.rotation.move_toward(Vector3.ZERO, 100)
 	
