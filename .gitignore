@@ -17,3 +17,5 @@ mono_crash.*.json
 *.vulcan.cache
 
 .vs/
+.vscode/
+.vscode/settings.json

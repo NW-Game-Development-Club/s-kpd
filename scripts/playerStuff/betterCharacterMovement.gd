@@ -1,8 +1,8 @@
 extends CharacterBody3D
 
 
-
-@export var speed: float = 5.0 # The speed the player moves
+@export var movementAcceleration: float = 15.0 # The acceleration of the player
+@export var maxSpeed: float = 5.0 # The maxSpeed the player moves
 @export var sprintMultiplier: float = 1.5 # The multiplier used while sprinting
 @export var jumpVelocity: float = 4.5
 
@@ -35,9 +35,9 @@ func _physics_process(delta: float) -> void:
 		
 		if isDebugMode:
 			if Input.is_action_pressed("jump"):
-				velocity.y = speed * getMovementSpeedModifier()
+				velocity.y = maxSpeed * getMovementSpeedModifier()
 			elif Input.is_action_pressed("crouch"):
-				velocity.y = -speed * getMovementSpeedModifier()
+				velocity.y = -maxSpeed * getMovementSpeedModifier()
 		else:
 			# Add the gravity.
 			if not is_on_floor():
@@ -55,9 +55,10 @@ func _physics_process(delta: float) -> void:
 		#direction = direction.rotated((-get_gravity()).normalized(), character_rot_helper.basis.get_euler().y)
 		if direction:
 			var yVel = velocity.dot(self.up_direction)
+			var speed = min(maxSpeed, movementAcceleration * delta + sqrt(self.velocity.x ** 2 + self.velocity.z ** 2))
 			var applyVelocity = direction * speed * getMovementSpeedModifier()
 			velocity = applyVelocity + self.up_direction * yVel
-			#velocity.z = direction.z * speed * getMovementSpeedModifier()
+			#velocity.z = direction.z * maxSpeed * getMovementSpeedModifier()
 		else:
 			if isDebugMode:
 				velocity.x = 0
