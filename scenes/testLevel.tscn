@@ -1,7 +1,7 @@
 [gd_scene load_steps=16 format=3 uid="uid://da1xfp6o3spos"]
 
-[ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="1_1sefh"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
+[ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="2_e6geh"]
 [ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
 [ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="4_w6fcp"]
 [ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
@@ -59,9 +59,8 @@ transform = Transform3D(0.173729, 0, 0, 0, 1, 0, 0, 0, 0.119035, 0, 0, 0)
 mesh = SubResource("BoxMesh_70iwh")
 skeleton = NodePath("../..")
 
-[node name="Character" parent="." instance=ExtResource("1_1sefh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20852, 2.51719, -9.11032)
-collision_priority = 5.0
+[node name="BetterCharacter" parent="." instance=ExtResource("2_e6geh")]
+transform = Transform3D(3.12415, 0, 0, 0, 1, 0, 0, 0, 2.65693, 2.31771, 0.971017, -44.887)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.825173, 0.564881, 0, -0.564881, 0.825173, 0, 11.4697, 0)
