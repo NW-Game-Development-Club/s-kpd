@@ -19,6 +19,12 @@ config/icon="res://sprites/icon.svg"
 
 GlobalVariables="*res://scripts/globalVariables.gd"
 
+[display]
+
+window/size/viewport_width=2400
+window/size/viewport_height=1350
+window/size/initial_position_type=3
+
 [global_group]
 
 Player=""

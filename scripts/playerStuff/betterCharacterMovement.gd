@@ -112,9 +112,15 @@ func round_to_dec(num, digit):
 func _input(event):
 	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if currentVehicle:
-			print(str(currentVehicle.rotation_degrees))
-			var horizTorque := Vector3(0, deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -100), 0) * currentVehicle.global_basis
-			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -100),0,0).rotated(currentVehicle.global_basis.y, currentVehicle.basis.get_euler().y)
+			var horizTorque := Vector3(0, deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1000), 0) * currentVehicle.global_basis
+			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1000),0,0).rotated(currentVehicle.global_basis.y, currentVehicle.basis.get_euler().y)
+			
+			# Switches to the Camera3D node in the ship
+			var ship_camera: Camera3D = currentVehicle.get_child(0)
+			if ship_camera:
+				# Disable the player's camera and enable the ship's camera
+				camera.current = false
+				ship_camera.current = true
 			
 			# Rotates the ship
 			currentVehicle.apply_torque(horizTorque + vertTorque)
@@ -122,6 +128,7 @@ func _input(event):
 			# Rotates the view vertically
 			camera.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
 			camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -75, 75)
+			camera.fov = 75
 			
 			# Rotates the view horizontally
 			character_rot_helper.rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
