@@ -1,5 +1,5 @@
 extends RigidBody3D
-@export var isDebugMode:bool = false
+@export var isDebugMode: bool = false
 
 @export var speed: float = 2.5 # The speed the player moves
 @export var sprintMultiplier: float = 1.5 # The multiplier used while sprinting
@@ -8,14 +8,9 @@ extends RigidBody3D
 @export var feet: Area3D; # The collison field that detects if we are standing on anything
 
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if (GlobalVariables.captureMouse):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -30,7 +25,7 @@ func getIsGrounded():
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	if Input.is_action_just_pressed("toggle_debug_flight"):
 		isDebugMode = !isDebugMode
-		print("Debug flight "+ ("Activated!" if isDebugMode else "Deactivated!"))
+		print("Debug flight " + ("Activated!" if isDebugMode else "Deactivated!"))
 	
 	if gravity_scale != 0 if isDebugMode else 1:
 		gravity_scale = 0 if isDebugMode else 1 # THIS MIGHT BE A BIT JANKY IN LEVELS SO BE CAREFUL
@@ -55,13 +50,13 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 			move_direction = move_direction.normalized()
 			# Update target velocity
 			target_velocity.x = move_direction.x
-			target_velocity.z = move_direction.z 
+			target_velocity.z = move_direction.z
 			
 			# 10 is multiplied onto the speed so that we have prettier speed numbers than "20"
 			target_velocity = target_velocity * speed * (sprintMultiplier if Input.is_action_pressed("sprint") else 1) * 10
 			
 			# Rotate target velocity so that it is relative to the players look dir
-			target_velocity = target_velocity.rotated(Vector3(0,1,0), character_body.basis.get_euler().y)
+			target_velocity = target_velocity.rotated(Vector3(0, 1, 0), character_body.basis.get_euler().y)
 			
 		# Use Ground movement if there is gravity && not debug mode, and EVA movement if there is no gravity
 		if state.total_gravity.y != 0 && !isDebugMode:
@@ -95,9 +90,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 					self.linear_damp = 1
 				state.linear_velocity = target_velocity * 0.8
 				if Input.is_action_pressed("jump"):
-					state.linear_velocity.y =  speed * 10 * 0.8
+					state.linear_velocity.y = speed * 10 * 0.8
 				if Input.is_action_pressed("crouch"):
-					state.linear_velocity.y = -speed * 10 * 0.8
+					state.linear_velocity.y = - speed * 10 * 0.8
 	else:
 		currentVehicle.linear_velocity = (move_direction * currentVehicle.speed)
 		var changeInPos = currentVehicle.global_position - lastPos
@@ -106,18 +101,24 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		#translate(move_direction)
 	#label.text = "Speed: "+str(round_to_dec(state.linear_velocity.length(), 2))
 	#label.text = "Speed: "+str(Vector3(round_to_dec(state.linear_velocity.x,2),round_to_dec(state.linear_velocity.y,2),round_to_dec(state.linear_velocity.z,2)))
-	label.text = "Gravity: "+str(state.total_gravity)
+	label.text = "Gravity: " + str(state.total_gravity)
 	if currentVehicle:
 		currentVehicle.rotation.move_toward(Vector3.ZERO, 100)
 	
-var lastPos:Vector3
+var lastPos: Vector3
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
 @export var MOUSE_SENSITIVITY: float = 0.3
 @export var character_body: Node3D # The character model we should rotate when the camera should rotate
-@onready var camera:Camera3D = get_viewport().get_camera_3d() # The current camera of the scene THIS MIGHT POSE A PROBLEM WITH MULTIPLAYER OR MULTIPLE CAMERAS SO I WILL NEED TO EDIT THIS TOO POTENTIALLY
+@onready var camera: Camera3D = get_viewport().get_camera_3d() # The current camera of the scene THIS MIGHT POSE A PROBLEM WITH MULTIPLAYER OR MULTIPLE CAMERAS SO I WILL NEED TO EDIT THIS TOO POTENTIALLY
 func _input(event):
+	# if (Input.is_action_just_pressed("pause_menu")): # Handles pause button tap
+	# 	GlobalVariables.mouseUnlocked = !GlobalVariables.mouseUnlocked
+	if (!GlobalVariables.mouseUnlocked):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		# Rotates the view vertically
 		camera.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
@@ -131,4 +132,3 @@ func pilotVehicle(ship):
 	self.reparent(ship)
 	currentVehicle = ship
 	lastPos = currentVehicle.global_position
-	

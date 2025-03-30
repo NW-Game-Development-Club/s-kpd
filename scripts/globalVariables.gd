@@ -1,3 +1,3 @@
 extends Node
 
-@export var captureMouse: bool = true
+@export var mouseUnlocked: bool = false

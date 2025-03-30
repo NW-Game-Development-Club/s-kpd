@@ -26,19 +26,19 @@ var selectedItem: Item
 
 @onready var parent = self.get_parent()
 
-func loadInventory():
+func loadPauseMenu():
 	itemList.clear()
 	for item: Item in inventory:
 		itemList.add_item(item.itemName)
 	itemList.get_parent().visible = true
 
-func toggleInventory():
+func togglePauseMenu():
 	if itemList.get_parent().visible:
 		GlobalVariables.mouseUnlocked = false # Locks the mouse to the screen
 		itemList.get_parent().visible = false
 	else:
 		GlobalVariables.mouseUnlocked = true # Unlocks the mouse from the screen
-		loadInventory()
+		loadPauseMenu()
 
 func getInventoryItemFromName(nameString) -> Item:
 	for item: Item in inventory:
@@ -91,6 +91,7 @@ func onWeaponSetSet(toolToSet: Item, weaponSetNumber: int):
 		print("Added to weapon set: " + str(selectedItem.itemName))
 
 func _input(event):
+	print("test")
 	if event.is_action_pressed("pick_up_item"):
 		var space_state = get_world_3d().direct_space_state
 		# use global coordinates, not local to node
@@ -129,8 +130,8 @@ func _input(event):
 		else:
 			print("No weapons equipped")
 			
-	if event.is_action_pressed("open_inventory"):
-		toggleInventory()
+	if event.is_action_just_pressed("pause_menu"):
+		togglePauseMenu()
 
 func dropItem(item: Item):
 	var droppedItem: worldItem = worldItemPrefab.instantiate()
@@ -145,7 +146,7 @@ func dropItem(item: Item):
 	if weaponSetIndex != -1:
 		weaponSets.remove_at(weaponSetIndex)
 	
-	loadInventory()
+	loadPauseMenu()
 	changeSelectionDisplays()
 
 func _on_drop_button_pressed() -> void:

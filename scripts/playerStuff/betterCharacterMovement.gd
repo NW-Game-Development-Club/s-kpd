@@ -1,7 +1,6 @@
 extends CharacterBody3D
 
 
-
 @export var speed: float = 5.0 # The speed the player moves
 @export var sprintMultiplier: float = 1.5 # The multiplier used while sprinting
 @export var jumpVelocity: float = 4.5
@@ -9,8 +8,8 @@ extends CharacterBody3D
 @export var label: Label
 
 @export_group("Debug")
-@export var isDebugMode:bool = false
-@export var debugFlightSpeedModifier:float = 2
+@export var isDebugMode: bool = false
+@export var debugFlightSpeedModifier: float = 2
 
 func getMovementSpeedModifier() -> float:
 	return (sprintMultiplier if Input.is_action_pressed("sprint") else 1) * (debugFlightSpeedModifier if isDebugMode else 1)
@@ -31,13 +30,13 @@ func _physics_process(delta: float) -> void:
 		if Input.is_action_just_pressed("toggle_debug_flight"):
 			isDebugMode = !isDebugMode
 			$MainCollider.disabled = isDebugMode
-			print("Debug flight "+ ("Activated!" if isDebugMode else "Deactivated!"))
+			print("Debug flight " + ("Activated!" if isDebugMode else "Deactivated!"))
 		
 		if isDebugMode:
 			if Input.is_action_pressed("jump"):
 				velocity.y = speed * getMovementSpeedModifier()
 			elif Input.is_action_pressed("crouch"):
-				velocity.y = -speed * getMovementSpeedModifier()
+				velocity.y = - speed * getMovementSpeedModifier()
 		else:
 			# Add the gravity.
 			if not is_on_floor():
@@ -65,8 +64,8 @@ func _physics_process(delta: float) -> void:
 				
 			else:
 				if is_on_floor():
-					var slowedVelocity:Vector3 = Vector3(velocity.x, velocity.y, velocity.z)
-					slowedVelocity -= slowedVelocity * min(delta/slowedVelocity.length()*20, 1.0)
+					var slowedVelocity: Vector3 = Vector3(velocity.x, velocity.y, velocity.z)
+					slowedVelocity -= slowedVelocity * min(delta / slowedVelocity.length() * 20, 1.0)
 					#slowedVelocity *= $"Rotation Helper".global_basis.y
 					velocity = Vector3(slowedVelocity.x, slowedVelocity.y, slowedVelocity.z)
 					pass
@@ -88,32 +87,35 @@ func _physics_process(delta: float) -> void:
 		#direction = direction.rotated(currentVehicle.basis.y, currentVehicle.basis.get_euler().y)
 		
 		
-			
 		currentVehicle.apply_central_force(direction * currentVehicle.speed)
 	#label.text = str(velocity if currentVehicle == null else currentVehicle.linear_velocity)
-	label.text = "Self: "+str(velocity) + ("Parent: "+ str(get_parent().linear_velocity) if get_parent() is RigidBody3D else "")
+	label.text = "Self: " + str(velocity) + ("Parent: " + str(get_parent().linear_velocity) if get_parent() is RigidBody3D else "")
 	#label.text = str(self.get_gravity())
 	#label.text = str(self.get_parent())
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if (GlobalVariables.captureMouse == true):
-		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
-	else:
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # Unlocks mouse
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
 
 func round_to_dec(num, digit):
 	return round(num * pow(10.0, digit)) / pow(10.0, digit)
 
 @export var MOUSE_SENSITIVITY: float = 0.3
 @export var character_rot_helper: Node3D # The character model we should rotate when the camera should rotate
-@onready var camera:Camera3D = get_viewport().get_camera_3d() # The current camera of the scene WARNING THIS MIGHT POSE A PROBLEM WITH MULTIPLAYER OR MULTIPLE CAMERAS SO I WILL NEED TO EDIT THIS TOO POTENTIALLY
+@onready var camera: Camera3D = get_viewport().get_camera_3d() # The current camera of the scene WARNING THIS MIGHT POSE A PROBLEM WITH MULTIPLAYER OR MULTIPLE CAMERAS SO I WILL NEED TO EDIT THIS TOO POTENTIALLY
 func _input(event):
+	if (Input.is_action_just_pressed("pause_menu")): # Handles pause button tap
+		GlobalVariables.mouseUnlocked = !GlobalVariables.mouseUnlocked
+	if (!GlobalVariables.mouseUnlocked):
+		Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED) # Locks the mouse to the screen
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE) # Unlocks mouse
+	
 	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		if currentVehicle:
 			print(str(currentVehicle.rotation_degrees))
 			var horizTorque := Vector3(0, deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -100), 0) * currentVehicle.global_basis
-			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -100),0,0).rotated(currentVehicle.global_basis.y, currentVehicle.basis.get_euler().y)
+			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -100), 0, 0).rotated(currentVehicle.global_basis.y, currentVehicle.basis.get_euler().y)
 			
 			# Rotates the ship
 			currentVehicle.apply_torque(horizTorque + vertTorque)
@@ -130,5 +132,3 @@ var currentVehicle: Ship
 func pilotVehicle(ship):
 	self.reparent(ship)
 	currentVehicle = ship
-	
-	
