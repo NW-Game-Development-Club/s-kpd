@@ -42,7 +42,7 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.939582, 0.690476, -1.18892)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
-transform = Transform3D(0.789674, -0.492225, 0.366239, -0.52366, -0.229707, 0.820375, -0.319681, -0.839613, -0.439152, 0, 0, 0)
+transform = Transform3D(0.788874, -0.492465, 0.367635, -0.525195, -0.229585, 0.819427, -0.319136, -0.839505, -0.439754, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Ship" parent="." instance=ExtResource("2_d7cdu")]
