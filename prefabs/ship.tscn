@@ -23,6 +23,9 @@ angular_damp = 5.0
 script = ExtResource("1_ysgku")
 speed = 10.0
 
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0404515, 6.08823, 22.7551)
+
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_0ydde")
 

@@ -46,4 +46,4 @@ transform = Transform3D(0.788874, -0.492465, 0.367635, -0.525195, -0.229585, 0.8
 shadow_enabled = true
 
 [node name="Ship" parent="." instance=ExtResource("2_d7cdu")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.3648, 1.32894, -20.3287)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.58983, 1.87012, -10.1102)

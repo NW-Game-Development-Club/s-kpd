@@ -97,8 +97,14 @@ func _input(event):
 		var fireDirection = -camera.global_transform.basis.z*grabRange
 		var query = PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position + fireDirection)
 		var result = space_state.intersect_ray(query)
+		var ship_camera
 		
-		if result:
+		if parent.currentVehicle != null:
+			parent.currentVehicle.unPilot()
+			parent.currentVehicle = null
+			camera.current = true
+			ship_camera = null
+		elif result:
 			if parent.currentVehicle == null:
 				if result.collider.is_in_group("items"):
 					var pickedTool:Item = result.collider.item
@@ -116,9 +122,13 @@ func _input(event):
 				elif result.collider is Ship:
 					result.collider.setPilot(parent)
 					parent.pilotVehicle(result.collider)
-			else:
-				parent.currentVehicle.unPilot()
-				parent.currentVehicle = null
+
+					# Switches to the Camera3D node in the ship
+					ship_camera = result.collider.get_child(0)
+					if ship_camera:
+						# Disable the player's camera and enable the ship's camera
+						camera.current = false
+						ship_camera.current = true
 		
 	if event.is_action_pressed("equip_weapon"):
 		if weaponSets && weaponSets.size() > 0:
