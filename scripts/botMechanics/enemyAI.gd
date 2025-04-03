@@ -7,6 +7,7 @@ extends RigidBody3D
 @export var force_magnitude = 80 # Newtons (kg*m/s^2)
 @export var max_speed = 100 # m/s
 @export var idle_max_speed_ratio = 0.5
+@export var enable_chase = false
 
 var time_before_ship_leaves = 5 # seconds
 
@@ -54,7 +55,7 @@ func _idle_state():
 	target = find_target()
 	_idle_movement()
 
-	if target != null:
+	if target != null && enable_chase:
 		current_state = EnemyState.CHASE
 		return
 
