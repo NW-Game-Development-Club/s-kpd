@@ -128,7 +128,7 @@ mass = 1000.0
 script = ExtResource("7_yvm3x")
 current_state = 0
 target = null
-force = 80
+force_magnitude = 80
 max_speed = 100
 idle_max_speed_ratio = 0.5
 

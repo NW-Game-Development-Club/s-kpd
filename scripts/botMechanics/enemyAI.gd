@@ -4,7 +4,7 @@ extends RigidBody3D
 @export var current_state = EnemyState.REST
 @export var target = null
 
-@export var force = 80 # Newtons (kg*m/s^2)
+@export var force_magnitude = 80 # Newtons (kg*m/s^2)
 @export var max_speed = 100 # m/s
 @export var idle_max_speed_ratio = 0.5
 
@@ -18,15 +18,15 @@ func _ready() -> void:
 func _idle_movement():
 	# this probably won't work because it switches directions every frame
 	# ill work on it later
-	#var random_force = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)) * force
-	var random_force = Vector3(0,0,-1) * force # this makes the ship move forward
+	#var random_force = Vector3(randf_range(-1, 1), randf_range(-1, 1), randf_range(-1, 1)) * force_magnitude
+	var random_force = -global_transform.basis.z * force_magnitude # this makes the ship move forward
 	self.apply_central_impulse(random_force)
 	pass
 
 # Called when the ship is moving towards a target
 func _chase_movement(delta: float):
 	var directional_force = target.global_transform.origin - global_transform.origin
-	self.apply_central_impulse(directional_force.normalized() * force)
+	self.apply_central_impulse(directional_force.normalized() * force_magnitude)
 	pass
 
 # This is the state machine controlling what the ship is trying to do
