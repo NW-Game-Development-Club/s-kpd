@@ -18,3 +18,5 @@ mono_crash.*.json
 
 .vs/
 *.tmp
+.vscode/
+.vscode/settings.json

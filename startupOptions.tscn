@@ -1,0 +1,169 @@
+[gd_scene load_steps=11 format=3 uid="uid://c2btri60uobap"]
+
+[ext_resource type="Script" path="res://scripts/startup_options.gd" id="1_4oj20"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fj2pk"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tgh6n"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_15rlo"]
+bg_color = Color(0.743484, 0.743481, 0.743482, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0eeiq"]
+bg_color = Color(0.607304, 0.607301, 0.607301, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3s8c0"]
+bg_color = Color(0.925353, 0.925353, 0.925353, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ew5gu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jjae6"]
+bg_color = Color(0, 0, 0, 0.168627)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jdqw8"]
+bg_color = Color(0, 0, 0, 0.792157)
+corner_radius_top_right = 8
+corner_radius_bottom_right = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d00gw"]
+bg_color = Color(0.156675, 0.156675, 0.156675, 0.368627)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+
+[node name="Startup Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4oj20")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_fj2pk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -314.0
+offset_top = -100.0
+offset_right = 317.0
+offset_bottom = 185.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 18
+
+[node name="Singleplayer" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.197937, 0.197937, 0.197937, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tgh6n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_15rlo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0eeiq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3s8c0")
+text = "Singleplayer"
+
+[node name="Host" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.197937, 0.197937, 0.197937, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tgh6n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_15rlo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0eeiq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3s8c0")
+text = "Host"
+
+[node name="Join" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_disabled_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_hover_color = Color(0.197937, 0.197937, 0.197937, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/icon_pressed_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 60
+theme_override_styles/focus = SubResource("StyleBoxEmpty_tgh6n")
+theme_override_styles/hover = SubResource("StyleBoxFlat_15rlo")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_0eeiq")
+theme_override_styles/normal = SubResource("StyleBoxFlat_3s8c0")
+text = "Join"
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -147.5
+offset_top = -301.0
+offset_right = 147.5
+offset_bottom = -179.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 84
+text = "S-KPD"
+horizontal_alignment = 1
+vertical_alignment = 2
+
+[node name="Back Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.119
+anchor_bottom = 0.061
+offset_right = 10.912
+offset_bottom = 26.472
+theme_override_font_sizes/font_size = 42
+theme_override_styles/focus = SubResource("StyleBoxEmpty_ew5gu")
+theme_override_styles/hover = SubResource("StyleBoxFlat_jjae6")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_jdqw8")
+theme_override_styles/normal = SubResource("StyleBoxFlat_d00gw")
+text = "Back"
+
+[connection signal="pressed" from="VBoxContainer/Singleplayer" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="VBoxContainer/Singleplayer" to="." method="_on_singleplayer_pressed"]
+[connection signal="pressed" from="Back Button" to="." method="_on_back_button_pressed"]
