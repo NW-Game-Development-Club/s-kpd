@@ -35,13 +35,13 @@ func align_with_y(xform, new_y):
 
 
 func renderRadarPoint(pos:Vector3, dir:Vector3):
-	var pointMesh = PlaneMesh.new()
+	var pointMesh = BoxMesh.new()
 	var meshInstance = MeshInstance3D.new()
 	meshInstance.mesh = pointMesh
 	meshInstance.visible = false
 	#print(meshInstance)
 	get_tree().root.add_child(meshInstance)
-	meshInstance.position = pos
+	meshInstance.position = pos + dir*0.5
 	
 	meshInstance.set_surface_override_material(0,radarPanelMaterial)
 	meshInstance.global_transform = align_with_y(meshInstance.global_transform, dir)

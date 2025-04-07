@@ -20,8 +20,8 @@ point_size = 5.0
 [sub_resource type="SphereMesh" id="SphereMesh_esa2c"]
 radius = 0.1
 height = 0.2
-radial_segments = 50
-rings = 50
+radial_segments = 300
+rings = 100
 
 [sub_resource type="BoxMesh" id="BoxMesh_cdjom"]
 size = Vector3(5, 5, 5)
@@ -44,7 +44,8 @@ isDebugMode = true
 
 [node name="RadarObj" type="Node3D" parent="."]
 script = ExtResource("2_8pmaq")
-radarResolution = 20
+radarResolution = 100
+radarLoadMDelay = 0.1
 radarPanelMaterial = SubResource("StandardMaterial3D_syo4a")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="RadarObj"]

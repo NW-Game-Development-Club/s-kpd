@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://ensq5srthb1s"]
 
-[ext_resource type="Script" path="res://scripts/playerStuff/characterMovement.gd" id="1_bfpak"]
+[ext_resource type="Script" path="res://scripts/playerStuff/DEPRECATED_characterMovement.gd" id="1_bfpak"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="1_k8g4o"]
 [ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="2_5rg2y"]
 [ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="2_6g4ha"]
