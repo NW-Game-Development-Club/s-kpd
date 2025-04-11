@@ -1,11 +1,12 @@
-[gd_scene load_steps=15 format=3 uid="uid://da1xfp6o3spos"]
+[gd_scene load_steps=16 format=3 uid="uid://da1xfp6o3spos"]
 
-[ext_resource type="PackedScene" uid="uid://ensq5srthb1s" path="res://prefabs/character.tscn" id="1_1sefh"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
+[ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="2_e6geh"]
 [ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
 [ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="4_w6fcp"]
 [ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
 [ext_resource type="PackedScene" uid="uid://2gnjkdtykap2" path="res://prefabs/ship.tscn" id="6_kh8fr"]
+[ext_resource type="Script" path="res://scripts/botMechanics/stateMachine.gd" id="7_yvm3x"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
@@ -57,10 +58,6 @@ shape = SubResource("BoxShape3D_1am2a")
 transform = Transform3D(0.173729, 0, 0, 0, 1, 0, 0, 0, 0.119035, 0, 0, 0)
 mesh = SubResource("BoxMesh_70iwh")
 skeleton = NodePath("../..")
-
-[node name="Character" parent="." instance=ExtResource("1_1sefh")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.20852, 2.51719, -9.11032)
-collision_priority = 5.0
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.825173, 0.564881, 0, -0.564881, 0.825173, 0, 11.4697, 0)
@@ -124,3 +121,16 @@ item = ExtResource("5_yov0m")
 
 [node name="Ship" parent="." instance=ExtResource("6_kh8fr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7213, 2.00562, -27.0503)
+speed = 0.0
+
+[node name="BetterCharacter" parent="." instance=ExtResource("2_e6geh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.95668, 0.632442, -12.89)
+
+[node name="Ship2" parent="." instance=ExtResource("6_kh8fr")]
+transform = Transform3D(0.461981, 0, -0.88689, 0, 1, 0, 0.88689, 0, 0.461981, -4.79565, 2.7625, -4.57864)
+script = ExtResource("7_yvm3x")
+current_state = 0
+target = null
+force = 100
+max_speed = 100
+idle_max_speed_ratio = 0.5
