@@ -79,18 +79,25 @@ func _physics_process(delta: float) -> void:
 	# Ship Movement
 	else:
 		var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
-		var direction := (currentVehicle.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var direction := 0.5 * (currentVehicle.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
 		if Input.is_action_pressed("jump"):
-			direction.y = 1
+			direction.y = 0.5
 		elif Input.is_action_pressed("crouch"):
-			direction.y = -1
+			direction.y = -0.5
+		elif Input.is_action_pressed("stop"):
+			if Input.is_action_pressed("toggle"):
+				direction =  -0.5 * currentVehicle.angular_velocity.normalized()
+			else:
+				direction =  -0.5 * currentVehicle.linear_velocity.normalized()
+
 		#else:
 			#direction.y = 0
 		#direction = direction.rotated(currentVehicle.basis.y, currentVehicle.basis.get_euler().y)
 		
-		
-			
-		currentVehicle.apply_central_force(direction * currentVehicle.speed)
+		if Input.is_action_pressed("toggle"):
+			currentVehicle.apply_torque(direction * currentVehicle.speed)
+		else:
+			currentVehicle.apply_central_force(direction * currentVehicle.speed)
 	#label.text = str(velocity if currentVehicle == null else currentVehicle.linear_velocity)
 	label.text = "Self: "+str(velocity) + ("Parent: "+ str(get_parent().linear_velocity) if get_parent() is RigidBody3D else "")
 	#label.text = str(self.get_gravity())
@@ -110,26 +117,17 @@ func round_to_dec(num, digit):
 @export var character_rot_helper: Node3D # The character model we should rotate when the camera should rotate
 @onready var camera:Camera3D = get_viewport().get_camera_3d() # The current camera of the scene WARNING THIS MIGHT POSE A PROBLEM WITH MULTIPLAYER OR MULTIPLE CAMERAS SO I WILL NEED TO EDIT THIS TOO POTENTIALLY
 func _input(event):
-	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
-		if currentVehicle:
-			print(str(currentVehicle.rotation_degrees))
-			var horizTorque := Vector3(0, deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -100), 0) * currentVehicle.global_basis
-			var vertTorque := Vector3(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -100),0,0).rotated(currentVehicle.global_basis.y, currentVehicle.basis.get_euler().y)
+	if event is InputEventMouseMotion && Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED && GlobalVariables.inRadar == false:
+		# Rotates the view vertically
+		camera.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
+		camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -75, 75)
 			
-			# Rotates the ship
-			currentVehicle.apply_torque(horizTorque + vertTorque)
-		else:
-			# Rotates the view vertically
-			camera.rotate_x(deg_to_rad(event.relative.y * MOUSE_SENSITIVITY * -1))
-			camera.rotation_degrees.x = clamp(camera.rotation_degrees.x, -75, 75)
-			
-			# Rotates the view horizontally
-			character_rot_helper.rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
+		# Rotates the view horizontally
+		character_rot_helper.rotate_y(deg_to_rad(event.relative.x * MOUSE_SENSITIVITY * -1))
 			
 
 var currentVehicle: Ship
 func pilotVehicle(ship):
 	self.reparent(ship)
 	currentVehicle = ship
-	
 	
