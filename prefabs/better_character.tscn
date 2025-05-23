@@ -1,18 +1,22 @@
-[gd_scene load_steps=15 format=3 uid="uid://3mcgdp8sij0t"]
+[gd_scene load_steps=17 format=3 uid="uid://3mcgdp8sij0t"]
 
 [ext_resource type="Script" path="res://scripts/playerStuff/betterCharacterMovement.gd" id="1_etma0"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_4dlv8"]
 [ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="3_u2eap"]
+[ext_resource type="Shader" path="res://prefabs/better_character.gdshader" id="4_843cd"]
 [ext_resource type="Script" path="res://scripts/playerStuff/inventoryHandler.gd" id="4_ptu0e"]
-[ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="5_sxtkr"]
 [ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="6_xenc2"]
 [ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="7_vav8e"]
+[ext_resource type="Script" path="res://prefabs/tween_camera.gd" id="8_smugo"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ebwuh"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_e7rta"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_385ov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_a0o7s"]
+shader = ExtResource("4_843cd")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_d3746"]
 radius = 0.351076
@@ -32,6 +36,7 @@ axis_lock_angular_y = true
 axis_lock_angular_z = true
 platform_on_leave = 2
 platform_floor_layers = 4294967292
+safe_margin = 0.1
 script = ExtResource("1_etma0")
 label = NodePath("Label")
 character_rot_helper = NodePath("Rotation Helper")
@@ -56,6 +61,7 @@ skeleton = NodePath("../../Camera3D")
 
 [node name="Camera3D" type="Camera3D" parent="Rotation Helper"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.52276, 0)
+cull_mask = 1048573
 current = true
 near = 0.3
 
@@ -74,21 +80,19 @@ skeleton = NodePath("")
 [node name="FirePoint" type="Node3D" parent="Rotation Helper/Camera3D/ToolShell/MeshInstance3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.55)
 
+[node name="CanvasLayer" type="CanvasLayer" parent="Rotation Helper/Camera3D"]
+
+[node name="CanvasModulate" type="CanvasModulate" parent="Rotation Helper/Camera3D/CanvasLayer"]
+material = SubResource("ShaderMaterial_a0o7s")
+
 [node name="Feet" type="Area3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Feet"]
 shape = SubResource("SphereShape3D_d3746")
 
-[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell", "itemList", "selectedItemNameBox", "selectedItemDescBox", "weaponSet1Box", "weaponSet2Box", "dropButton")]
+[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("itemList")]
 script = ExtResource("4_ptu0e")
-toolShell = NodePath("../Rotation Helper/Camera3D/ToolShell")
-worldItemPrefab = ExtResource("5_sxtkr")
 itemList = NodePath("../InventoryPanel/ItemList")
-selectedItemNameBox = NodePath("../InventoryPanel/SelectedItemName")
-selectedItemDescBox = NodePath("../InventoryPanel/SelectedItemDesc")
-weaponSet1Box = NodePath("../InventoryPanel/WeaponSetData/WeaponSet1Value")
-weaponSet2Box = NodePath("../InventoryPanel/WeaponSetData/WeaponSet2Value")
-dropButton = NodePath("../InventoryPanel/DropButton")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
@@ -247,6 +251,10 @@ offset_right = 238.0
 offset_bottom = 283.0
 disabled = true
 text = "Drop Selected Item"
+
+[node name="TweenCamera" type="Camera3D" parent="."]
+cull_mask = 1048573
+script = ExtResource("8_smugo")
 
 [connection signal="empty_clicked" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemDeselectAll"]
 [connection signal="item_selected" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemSelect"]

@@ -4,14 +4,14 @@
 [ext_resource type="Script" path="res://scripts/radar.gd" id="2_8pmaq"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syo4a"]
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0.580952, 0.899306, 0.841212, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_sdfk6"]
 height = 0.5
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wrrdy"]
 vertex_color_use_as_albedo = true
-albedo_color = Color(0, 1, 0, 1)
+albedo_color = Color(0.454607, 0.913478, 0.916068, 1)
 emission = Color(0.568836, 0.615012, 0.631549, 1)
 disable_receive_shadows = true
 use_point_size = true
@@ -44,7 +44,6 @@ isDebugMode = true
 
 [node name="RadarObj" type="Node3D" parent="."]
 script = ExtResource("2_8pmaq")
-radarResolution = 100
 radarLoadMDelay = 0.1
 radarPanelMaterial = SubResource("StandardMaterial3D_syo4a")
 
