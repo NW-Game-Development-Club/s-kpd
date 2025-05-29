@@ -1,16 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bc7h4gl8yqj3k"]
+[gd_scene load_steps=5 format=3 uid="uid://bcji6pv1sdi28"]
 
 [ext_resource type="Script" path="res://scripts/classes/Tile.gd" id="1_nmr1a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_35coj"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_s7v55"]
-albedo_color = Color(0.0588235, 1, 1, 1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_ee5qq"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_w6jut"]
+albedo_color = Color(0.115551, 0.756688, 0.846201, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2j2je"]
-size = Vector3(1, 0.210449, 1)
+size = Vector3(1, 0.209961, 1)
 
 [node name="StraightPiece" type="Node3D" node_paths=PackedStringArray("spawnNodes")]
 transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0, 0, 0)
@@ -21,27 +19,27 @@ spawnNodes = [NodePath("SpawnNode1")]
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, -0.4, 0)
 mesh = SubResource("BoxMesh_35coj")
-surface_material_override/0 = SubResource("StandardMaterial3D_s7v55")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6jut")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, -0.4)
-mesh = SubResource("BoxMesh_ee5qq")
-surface_material_override/0 = SubResource("StandardMaterial3D_s7v55")
-
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0.4)
-mesh = SubResource("BoxMesh_ee5qq")
-surface_material_override/0 = SubResource("StandardMaterial3D_s7v55")
-
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.2, 0, 0, 0, 1, 0, 0.4, 0)
 mesh = SubResource("BoxMesh_35coj")
-surface_material_override/0 = SubResource("StandardMaterial3D_s7v55")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6jut")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, -0.4)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6jut")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.2, 0, 0, 0.4)
+mesh = SubResource("BoxMesh_35coj")
+surface_material_override/0 = SubResource("StandardMaterial3D_w6jut")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.394775, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.39502, 0)
 shape = SubResource("BoxShape3D_2j2je")
 
 [node name="SpawnNode1" type="Node3D" parent="."]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://cnkbjyul604g2"]
 
 [ext_resource type="Script" path="res://scripts/levelStuff/better_level_generation.gd" id="1_eihxu"]
-[ext_resource type="PackedScene" uid="uid://bc7h4gl8yqj3k" path="res://prefabs/parts/straight_piece.tscn" id="2_2w1r2"]
+[ext_resource type="PackedScene" uid="uid://bcji6pv1sdi28" path="res://prefabs/parts/straight_piece.tscn" id="3_nb8v6"]
 [ext_resource type="PackedScene" uid="uid://enltvhwyml0v" path="res://prefabs/parts/corner_piece.tscn" id="3_s3dta"]
 [ext_resource type="PackedScene" uid="uid://b85biewuwnolt" path="res://prefabs/parts/t_int_piece.tscn" id="4_6hkp3"]
 [ext_resource type="PackedScene" uid="uid://bg66aumssuwo7" path="res://prefabs/parts/4_way_piece.tscn" id="5_c85t7"]
@@ -21,7 +21,7 @@ environment = SubResource("Environment_qfbsy")
 
 [node name="Level Generator" type="Node3D" parent="."]
 script = ExtResource("1_eihxu")
-pieces = Array[PackedScene]([ExtResource("3_s3dta"), ExtResource("2_2w1r2"), ExtResource("4_6hkp3"), ExtResource("5_c85t7")])
+pieces = Array[PackedScene]([ExtResource("3_s3dta"), ExtResource("3_nb8v6"), ExtResource("4_6hkp3"), ExtResource("5_c85t7")])
 amtOfPiecesToSpawn = 100
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]

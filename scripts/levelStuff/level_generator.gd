@@ -1,6 +1,7 @@
 extends Node3D
 
 @export var pieces: Array[PackedScene]
+@export var cap: PackedScene
 @export var amtOfPiecesToSpawn:int = 10
 
 # Called when the node enters the scene tree for the first time.
@@ -12,20 +13,25 @@ func pickBiasedRandomPiece():
 	var random_float = randf()
 	if random_float < 0.4: # Straight Piece values
 		return pieces[0]
-	elif random_float >= 0.4 && random_float < 0.6: # Corner Piece values
+	elif random_float >= 0.4 && random_float < 0.5: # Corner Piece values
 		return pieces[1]
 	elif random_float >= 0.6 && random_float < 0.8: # TInt Piece values
 		return pieces[2]
 	elif random_float >= 0.8 && random_float < 0.9:
 		return pieces[4]
+	elif random_float >= 0.5 && random_float < 0.6:
+		return pieces[5]
 	else: # 4Way Piece values
 		return pieces[3]
-
 # Recursively generates the amount of tiles specified in the base case if statement 
 func generateLevel(spawnAtNode: Node3D):
 	await get_tree().create_timer(randf_range(0.001,0.005)).timeout
 	if self.get_children().size() >= amtOfPiecesToSpawn:
 		print("Path Finished at " + str(spawnAtNode.global_position))
+		var placedPiece:Tile = cap.instantiate()
+		placedPiece.position = self.position if (spawnAtNode == null) else spawnAtNode.global_position
+		placedPiece.rotation = self.rotation if (spawnAtNode == null) else spawnAtNode.global_rotation
+		add_child(placedPiece)
 		return 0
 	
 	if spawnAtNode != null:
