@@ -97,10 +97,12 @@ func _input(event):
 		var fireDirection = -camera.global_transform.basis.z*grabRange
 		var query = PhysicsRayQueryParameters3D.create(camera.global_position, camera.global_position + fireDirection)
 		var result = space_state.intersect_ray(query)
+		result.collision_mask = 1 << 0 | 1 << 2
 		
 		if result:
 			if parent.currentVehicle == null:
 				if result.collider.is_in_group("items"):
+					print("test")
 					var pickedTool:Item = result.collider.item
 					inventory.append(pickedTool)
 					print("Picked up "+pickedTool.itemName)
@@ -116,7 +118,17 @@ func _input(event):
 				elif result.collider is Ship:
 					result.collider.setPilot(parent)
 					parent.pilotVehicle(result.collider)
-			else:
+					
+			elif str(result.collider).substr(0, 11) == "RadarScreen":
+				GlobalVariables.inRadar = !GlobalVariables.inRadar
+				if GlobalVariables.inRadar:
+					GlobalVariables.tweenCamera.start_camera_transition(camera, GlobalVariables.radarScreenCamera)
+					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+				else:
+					GlobalVariables.tweenCamera.start_camera_transition(GlobalVariables.radarScreenCamera, camera)
+					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+				
+			else: 
 				parent.currentVehicle.unPilot()
 				parent.currentVehicle = null
 		
@@ -150,3 +162,9 @@ func dropItem(item:Item):
 
 func _on_drop_button_pressed() -> void:
 	dropItem(selectedItem)
+	
+var currentVehicle: Ship
+func pilotVehicle(ship):
+	self.reparent(ship)
+	currentVehicle = ship
+	

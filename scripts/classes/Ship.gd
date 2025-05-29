@@ -10,7 +10,8 @@ var pilot: CharacterBody3D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	self.linear_damp = 0
+	self.angular_damp = 0
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,6 +20,7 @@ func _process(delta: float) -> void:
 
 func setPilot(player):
 	pilot = player
+	
 
 func unPilot():
 	pilot = null
