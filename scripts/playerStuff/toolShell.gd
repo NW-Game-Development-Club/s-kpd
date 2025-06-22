@@ -4,8 +4,6 @@ class_name ToolShell
 
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Tool") var equippedTool:Tool
 
-# GUN item type only variables
-@export_group("Gun Only Variables")
 @export var firePoint:Node3D
 
 @onready var meshInstance:MeshInstance3D = get_node("MeshInstance3D")
@@ -36,8 +34,8 @@ func equip(tool:Tool):
 	equippedTool = tool
 	meshInstance.mesh = equippedTool.model
 	equippedTool.onEquip()
-	if equippedTool is Gun:
-		equippedTool.prep(firePoint, get_viewport().get_camera_3d())
+	equippedTool.prep(self, get_viewport())
+		
 	print("Equipped "+ str(tool.itemName))
 
 func unequip():

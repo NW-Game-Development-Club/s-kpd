@@ -24,9 +24,9 @@ var firePoint: Node3D
 var crossHair: Node3D
 var lastFiredTime: int = 0
 
-func prep(firePoint:Node3D, crossHair:Node3D):
-	self.firePoint = firePoint
-	self.crossHair = crossHair
+func prep(toolShell: ToolShell, viewport:Viewport):
+	self.firePoint = toolShell.firePoint
+	self.crossHair = viewport.crossHair
 	self.lastFiredTime = 0
 
 func onReload():
