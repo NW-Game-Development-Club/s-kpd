@@ -19,7 +19,6 @@ func start_camera_transition(CameraA, CameraB):
 	CameraA.current = false
 	timer = 0.0
 	is_transitioning = true
-	print("test")
 
 func _process(delta):
 	if is_transitioning:

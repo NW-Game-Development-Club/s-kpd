@@ -4,6 +4,8 @@ class_name ToolShell
 
 @export_custom(PROPERTY_HINT_RESOURCE_TYPE, "Tool") var equippedTool:Tool
 
+# GUN item type only variables
+@export_group("Gun Only Variables")
 @export var firePoint:Node3D
 
 @onready var meshInstance:MeshInstance3D = get_node("MeshInstance3D")
@@ -25,6 +27,9 @@ func _input(event):
 					print("Item on cooldown for " + str(cooldownTime) + "ms")
 			if event.is_action_pressed("reload"):
 				equippedTool.onReload()
+		else:
+			if event.is_action_pressed("activate_item"):
+				equippedTool.onActivate()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
@@ -34,8 +39,8 @@ func equip(tool:Tool):
 	equippedTool = tool
 	meshInstance.mesh = equippedTool.model
 	equippedTool.onEquip()
-	equippedTool.prep(self, get_viewport())
-		
+	if equippedTool is Gun:
+		equippedTool.prep(firePoint, get_viewport().get_camera_3d())
 	print("Equipped "+ str(tool.itemName))
 
 func unequip():

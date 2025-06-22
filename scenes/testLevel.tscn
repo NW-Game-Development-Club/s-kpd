@@ -1,5 +1,6 @@
-[gd_scene load_steps=18 format=3 uid="uid://da1xfp6o3spos"]
+[gd_scene load_steps=21 format=3 uid="uid://da1xfp6o3spos"]
 
+[ext_resource type="Script" path="res://scenes/task_list.gd" id="1_m8wia"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
 [ext_resource type="Script" path="res://scenes/mesh_instance_3d.gd" id="2_v3xfv"]
 [ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
@@ -7,6 +8,7 @@
 [ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
 [ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="6_4otqv"]
 [ext_resource type="PackedScene" uid="uid://2gnjkdtykap2" path="res://prefabs/ship.tscn" id="6_kh8fr"]
+[ext_resource type="Resource" uid="uid://gn7nxjqi73jn" path="res://itemData/Camera.tres" id="8_dxcbi"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
@@ -39,7 +41,14 @@ size = Vector3(100, 100, 100)
 [sub_resource type="BoxMesh" id="BoxMesh_6qy34"]
 size = Vector3(100, 100, 100)
 
+[sub_resource type="Environment" id="Environment_re8nk"]
+glow_enabled = true
+glow_intensity = 1.98
+glow_strength = 1.23
+glow_hdr_threshold = 0.5
+
 [node name="TestLevel" type="Node3D"]
+script = ExtResource("1_m8wia")
 
 [node name="Floor" type="StaticBody3D" parent="."]
 transform = Transform3D(3.12415, 0, 0, 0, 1, 0, 0, 0, 2.65693, 0, 0, 0)
@@ -130,6 +139,9 @@ item = ExtResource("5_yov0m")
 
 [node name="Ship" parent="." instance=ExtResource("6_kh8fr")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.7213, 2.00562, -27.0503)
+mass = 1e+06
+inertia = Vector3(1e+06, 1e+06, 1e+06)
+speed = 1.6e+06
 
 [node name="BetterCharacter" parent="." instance=ExtResource("6_4otqv")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0617397, 0.5, -9.77588)
@@ -153,3 +165,9 @@ shape = SubResource("BoxShape3D_4hqcv")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D/StaticBody3D/CollisionShape3D"]
 mesh = SubResource("BoxMesh_6qy34")
 skeleton = NodePath("../../..")
+
+[node name="Camera" parent="." instance=ExtResource("3_sn03i")]
+item = ExtResource("8_dxcbi")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_re8nk")

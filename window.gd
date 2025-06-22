@@ -10,6 +10,7 @@ var resize_dir = ResizeDir.NONE
 var drag_start_pos := Vector2.ZERO
 var drag_start_rect := Rect2()
 var min_size := Vector2(500, 300)
+	
 
 func _ready():
 	var handles = {
@@ -28,6 +29,7 @@ func _ready():
 		handle.gui_input.connect(_on_resize_handle_input.bind(handles[handle]))
 
 func _on_resize_handle_input(event, direction):
+	print($".".size)
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:

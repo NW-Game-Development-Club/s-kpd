@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://3mcgdp8sij0t"]
+[gd_scene load_steps=18 format=3 uid="uid://3mcgdp8sij0t"]
 
 [ext_resource type="Script" path="res://scripts/playerStuff/betterCharacterMovement.gd" id="1_etma0"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_4dlv8"]
 [ext_resource type="Script" path="res://scripts/playerStuff/toolShell.gd" id="3_u2eap"]
 [ext_resource type="Shader" path="res://prefabs/better_character.gdshader" id="4_843cd"]
 [ext_resource type="Script" path="res://scripts/playerStuff/inventoryHandler.gd" id="4_ptu0e"]
+[ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="6_ijqds"]
 [ext_resource type="Shader" path="res://materials/shaders/crosshairInverted.gdshader" id="6_xenc2"]
 [ext_resource type="Texture2D" uid="uid://d2uj83xgcpmu4" path="res://sprites/Circle.png" id="7_vav8e"]
 [ext_resource type="Script" path="res://prefabs/tween_camera.gd" id="8_smugo"]
@@ -90,9 +91,16 @@ material = SubResource("ShaderMaterial_a0o7s")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Feet"]
 shape = SubResource("SphereShape3D_d3746")
 
-[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("itemList")]
+[node name="InventoryHandler" type="Node3D" parent="." node_paths=PackedStringArray("toolShell", "itemList", "selectedItemNameBox", "selectedItemDescBox", "weaponSet1Box", "weaponSet2Box", "dropButton")]
 script = ExtResource("4_ptu0e")
+toolShell = NodePath("../Rotation Helper/Camera3D/ToolShell")
+worldItemPrefab = ExtResource("6_ijqds")
 itemList = NodePath("../InventoryPanel/ItemList")
+selectedItemNameBox = NodePath("../InventoryPanel/SelectedItemName")
+selectedItemDescBox = NodePath("../InventoryPanel/SelectedItemDesc")
+weaponSet1Box = NodePath("../InventoryPanel/WeaponSetData/WeaponSet1Value")
+weaponSet2Box = NodePath("../InventoryPanel/WeaponSetData/WeaponSet2Value")
+dropButton = NodePath("../InventoryPanel/DropButton")
 
 [node name="Label" type="Label" parent="."]
 offset_right = 40.0
@@ -253,7 +261,7 @@ disabled = true
 text = "Drop Selected Item"
 
 [node name="TweenCamera" type="Camera3D" parent="."]
-cull_mask = 1048573
+cull_mask = 1047553
 script = ExtResource("8_smugo")
 
 [connection signal="empty_clicked" from="InventoryPanel/ItemList" to="InventoryHandler" method="onInventoryItemDeselectAll"]

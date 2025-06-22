@@ -1,21 +1,56 @@
-[gd_scene load_steps=17 format=3 uid="uid://c3fogervwojm4"]
+[gd_scene load_steps=50 format=3 uid="uid://c3fogervwojm4"]
 
 [ext_resource type="Script" path="res://User_Name.gd" id="1_678le"]
 [ext_resource type="Texture2D" uid="uid://dxufiimdt72sk" path="res://sprites/1000000947.jpg" id="1_pxjjt"]
 [ext_resource type="Texture2D" uid="uid://c0iwej7mair62" path="res://sprites/CloseRegular (1).png" id="2_x4hqw"]
+[ext_resource type="Texture2D" uid="uid://dmteyeatsw18y" path="res://sprites/Windows XP Bar (2).png" id="3_uiea0"]
+[ext_resource type="FontFile" uid="uid://cws5leo7ef27j" path="res://materials/Tahoma-Regular-font.ttf" id="4_tpu8m"]
 [ext_resource type="Texture2D" uid="uid://c5u8nhip0fapn" path="res://sprites/Gamedev Radar ICON.png" id="5_i2i67"]
 [ext_resource type="Script" path="res://window.gd" id="5_salh6"]
+[ext_resource type="Script" path="res://power_button.gd" id="5_tdjcx"]
+[ext_resource type="Texture2D" uid="uid://dbiu6iwilk4g6" path="res://materials/png-transparent-computer-mouse-hourglass-pointer-cursor-computer-mouse-electronics-rectangle-mouse-removebg-preview.png" id="6_t47wd"]
 [ext_resource type="Script" path="res://appButton.gd" id="7_cfssb"]
 [ext_resource type="Texture2D" uid="uid://bqgr3bolbukd7" path="res://sprites/Window.webp" id="8_31eub"]
-[ext_resource type="Texture2D" uid="uid://buvpiibdtfytw" path="res://sprites/windows-cursor-icon-10-removebg-preview.png" id="8_k2mab"]
 [ext_resource type="Script" path="res://mouse.gd" id="9_4o6ex"]
+[ext_resource type="Script" path="res://texture_rect.gd" id="10_55m5t"]
 [ext_resource type="Script" path="res://username_&_data.gd" id="10_gu0xh"]
 [ext_resource type="Script" path="res://close_button.gd" id="11_u55vk"]
-[ext_resource type="Script" path="res://sub_viewport.gd" id="12_a2ytu"]
+[ext_resource type="Script" path="res://camera_3d.gd" id="12_cl3po"]
 [ext_resource type="Script" path="res://select_box.gd" id="13_grsae"]
+[ext_resource type="Script" path="res://max_button.gd" id="14_x1kh4"]
+[ext_resource type="Texture2D" uid="uid://lt0qo5qviwvm" path="res://sprites/Eclipse Co. Boot Screen (1).jpg" id="17_4vsbn"]
+[ext_resource type="Texture2D" uid="uid://p0dv03vjobi" path="res://sprites/Eclipse Co. Boot Screen (2).jpg" id="18_o6b76"]
+[ext_resource type="Texture2D" uid="uid://dj8r6qvxce40s" path="res://sprites/Eclipse Co. Boot Screen (3).jpg" id="19_nx3nc"]
+[ext_resource type="Texture2D" uid="uid://bf8npi28mbq2x" path="res://sprites/Eclipse Co. Boot Screen (4).jpg" id="20_ptwjm"]
+[ext_resource type="Texture2D" uid="uid://bascvfmt6yej4" path="res://sprites/Eclipse Co. Boot Screen (5).jpg" id="21_xc37h"]
+[ext_resource type="Texture2D" uid="uid://17vaaryie1cm" path="res://sprites/Eclipse Co. Boot Screen (6).jpg" id="22_ct0vc"]
+[ext_resource type="Texture2D" uid="uid://bm0aovh00em3w" path="res://sprites/Eclipse Co. Boot Screen (7).jpg" id="23_g25bp"]
+[ext_resource type="Texture2D" uid="uid://cucbdt711qb3n" path="res://sprites/Eclipse Co. Boot Screen (8).jpg" id="24_cfj0u"]
+[ext_resource type="Texture2D" uid="uid://bi0terclkq2e" path="res://sprites/Eclipse Co. Boot Screen (9).jpg" id="25_3diqd"]
+[ext_resource type="Texture2D" uid="uid://x3u573nvsm3u" path="res://sprites/Eclipse Co. Boot Screen (10).jpg" id="26_gdt1m"]
+[ext_resource type="Texture2D" uid="uid://b54nwsq8l4vr2" path="res://sprites/Eclipse Co. Boot Screen (11).jpg" id="27_3wt8o"]
+[ext_resource type="Texture2D" uid="uid://dw7i45grgxr0r" path="res://sprites/Eclipse Co. Boot Screen (12).jpg" id="28_agyhp"]
+[ext_resource type="Texture2D" uid="uid://d0y7uxn8ujjbr" path="res://sprites/Eclipse Co. Boot Screen (13).jpg" id="29_frjxq"]
+[ext_resource type="Texture2D" uid="uid://by6fhelghly6j" path="res://sprites/Eclipse Co. Boot Screen (14).jpg" id="30_vav1v"]
+[ext_resource type="Texture2D" uid="uid://8qdke3qsylq5" path="res://sprites/Eclipse Co. Boot Screen (15).jpg" id="31_2c8lx"]
+[ext_resource type="Texture2D" uid="uid://b66x0c8br7qbt" path="res://sprites/Eclipse Co. Boot Screen (16).jpg" id="32_6wyus"]
+[ext_resource type="Texture2D" uid="uid://dqdt2agu53hu0" path="res://sprites/Eclipse Co. Boot Screen (17).jpg" id="33_yg5fe"]
+[ext_resource type="Texture2D" uid="uid://djalankdhf68f" path="res://sprites/Eclipse Co. Boot Screen (18).jpg" id="34_vb5tl"]
+[ext_resource type="Texture2D" uid="uid://ct31dxljv5s5y" path="res://sprites/Eclipse Co. Boot Screen (19).jpg" id="35_8dfx2"]
+[ext_resource type="Texture2D" uid="uid://ic2kp73r85bi" path="res://sprites/Eclipse Co. Boot Screen (20).jpg" id="36_06tx4"]
+[ext_resource type="Texture2D" uid="uid://wak13ygrrf7h" path="res://sprites/Eclipse Co. Boot Screen (21).jpg" id="37_psf5w"]
+[ext_resource type="Texture2D" uid="uid://dsan2h0ursoaw" path="res://sprites/Eclipse Co. Boot Screen (22).jpg" id="38_0m1q6"]
+[ext_resource type="Texture2D" uid="uid://dnw7wc77j8kca" path="res://sprites/Eclipse Co. Boot Screen (23).jpg" id="39_cs66i"]
+[ext_resource type="Script" path="res://boot_screen.gd" id="40_yr43v"]
+[ext_resource type="Script" path="res://timer.gd" id="41_h52vl"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ekc60"]
-bg_color = Color(0, 0, 0.509804, 1)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5qwsn"]
+bg_color = Color(1, 1, 1, 0.152941)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(1, 1, 1, 0.266667)
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_cmeoe"]
 texture = ExtResource("8_31eub")
@@ -24,77 +59,196 @@ texture_margin_top = 4.0
 texture_margin_right = 4.0
 texture_margin_bottom = 4.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_kurlk"]
+viewport_path = NodePath("RadarWindow/TextureRect/SubViewport")
+
+[sub_resource type="Environment" id="Environment_sxdvc"]
+background_mode = 1
+background_color = Color(0.521569, 0.709804, 0.701961, 1)
+
 [sub_resource type="LabelSettings" id="LabelSettings_m10nw"]
 font_size = 27
 
+[sub_resource type="SpriteFrames" id="SpriteFrames_0n71a"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_4vsbn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_o6b76")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_nx3nc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_ptwjm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_xc37h")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_ct0vc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_g25bp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_cfj0u")
+}, {
+"duration": 1.0,
+"texture": ExtResource("25_3diqd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("26_gdt1m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("27_3wt8o")
+}, {
+"duration": 1.0,
+"texture": ExtResource("28_agyhp")
+}, {
+"duration": 1.0,
+"texture": ExtResource("29_frjxq")
+}, {
+"duration": 1.0,
+"texture": ExtResource("30_vav1v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("31_2c8lx")
+}, {
+"duration": 1.0,
+"texture": ExtResource("32_6wyus")
+}, {
+"duration": 1.0,
+"texture": ExtResource("33_yg5fe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("34_vb5tl")
+}, {
+"duration": 1.0,
+"texture": ExtResource("35_8dfx2")
+}, {
+"duration": 1.0,
+"texture": ExtResource("36_06tx4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("37_psf5w")
+}],
+"loop": true,
+"name": &"Booting",
+"speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_0m1q6")
+}],
+"loop": true,
+"name": &"Off",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("38_0m1q6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("39_cs66i")
+}],
+"loop": true,
+"name": &"Start",
+"speed": 5.0
+}]
+
 [node name="WinDesktop" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 11.0
-offset_top = 6.0
+anchor_right = 1.669
+anchor_bottom = 1.742
+offset_right = 0.312012
+offset_bottom = 0.18396
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_678le")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
-offset_left = -9.0
-offset_top = -13.0
-offset_right = 1928.0
-offset_bottom = 1126.0
+offset_top = -1.0
+offset_right = 644.0
+offset_bottom = 478.0
+scale = Vector2(1.09593, 1.09593)
 texture = ExtResource("1_pxjjt")
-expand_mode = 2
+expand_mode = 1
 
 [node name="Panel" type="Panel" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -74.0
+offset_left = 90.0
+offset_top = -362.0
+offset_right = -1185.0
+offset_bottom = -294.0
 grow_horizontal = 2
 grow_vertical = 0
-theme_override_styles/panel = SubResource("StyleBoxFlat_ekc60")
+
+[node name="ColorRect" type="ColorRect" parent="Panel"]
+layout_mode = 0
+offset_left = -17.0
+offset_top = 33.0
+offset_right = 667.0
+offset_bottom = 93.0
+color = Color(0, 0, 0, 1)
+
+[node name="BottomBar" type="Sprite2D" parent="Panel"]
+position = Vector2(323.706, -37.125)
+scale = Vector2(0.415334, 0.415334)
+texture = ExtResource("3_uiea0")
 
 [node name="Username & Data" type="RichTextLabel" parent="Panel"]
 layout_mode = 0
-offset_left = 1012.0
-offset_top = 1.0
-offset_right = 1293.0
-offset_bottom = 192.0
+offset_left = 575.0
+offset_top = 34.0
+offset_right = 855.435
+offset_bottom = 225.0
+scale = Vector2(0.27, 0.27)
 text = "cc
 "
 script = ExtResource("10_gu0xh")
 
+[node name="PowerButton" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = -13.0
+offset_top = 30.0
+offset_right = 109.0
+offset_bottom = 80.0
+scale = Vector2(0.55, 0.55)
+theme_override_constants/icon_max_width = 115
+theme_override_fonts/font = ExtResource("4_tpu8m")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxFlat_5qwsn")
+flat = true
+icon_alignment = 1
+vertical_icon_alignment = 0
+script = ExtResource("5_tdjcx")
+
 [node name="RadarApp" type="Button" parent="."]
+visible = false
 layout_mode = 0
 offset_left = 17.0
 offset_top = 70.0
 offset_right = 140.0
-offset_bottom = 210.25
-theme_override_constants/outline_size = 0
+offset_bottom = 206.25
 theme_override_constants/icon_max_width = 115
+theme_override_fonts/font = ExtResource("4_tpu8m")
+theme_override_font_sizes/font_size = 16
+theme_override_styles/focus = SubResource("StyleBoxFlat_5qwsn")
 text = "Radar"
 icon = ExtResource("5_i2i67")
 flat = true
 icon_alignment = 1
 vertical_icon_alignment = 0
 script = ExtResource("7_cfssb")
-
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-layer = 5
-follow_viewport_enabled = true
-
-[node name="Mouse" type="Sprite2D" parent="CanvasLayer"]
-top_level = true
-visibility_layer = 3
-z_index = 925
-position = Vector2(365, 116)
-scale = Vector2(0.09, 0.09)
-texture = ExtResource("8_k2mab")
-script = ExtResource("9_4o6ex")
 
 [node name="RadarWindow" type="PanelContainer" parent="."]
 visible = false
@@ -103,13 +257,30 @@ anchors_preset = -1
 anchor_left = 0.305
 anchor_top = 0.241
 anchor_right = 0.761
-anchor_bottom = 0.801
-offset_left = -0.360016
-offset_top = 56.832
-offset_right = 14.3279
-offset_bottom = -0.0480347
+anchor_bottom = 1.0
+offset_left = -0.00500488
+offset_top = 57.278
+offset_right = 90.699
+offset_bottom = 90.0
 theme_override_styles/panel = SubResource("StyleBoxTexture_cmeoe")
 script = ExtResource("5_salh6")
+
+[node name="TextureRect" type="TextureRect" parent="RadarWindow"]
+clip_contents = true
+layout_mode = 2
+mouse_filter = 0
+mouse_force_pass_scroll_events = false
+texture = SubResource("ViewportTexture_kurlk")
+stretch_mode = 4
+script = ExtResource("10_55m5t")
+
+[node name="SubViewport" type="SubViewport" parent="RadarWindow/TextureRect"]
+
+[node name="Camera3D" type="Camera3D" parent="RadarWindow/TextureRect/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3.66267)
+cull_mask = 1048574
+environment = SubResource("Environment_sxdvc")
+script = ExtResource("12_cl3po")
 
 [node name="BlueBar" type="ColorRect" parent="RadarWindow"]
 custom_minimum_size = Vector2(0, 40)
@@ -164,6 +335,32 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
 
+[node name="CloseButton" type="Button" parent="RadarWindow/ResizeHandle_TopRight"]
+layout_mode = 0
+offset_left = 2.00006
+offset_top = -1.0
+offset_right = 50.0001
+offset_bottom = 41.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+action_mode = 0
+icon = ExtResource("2_x4hqw")
+vertical_icon_alignment = 0
+script = ExtResource("11_u55vk")
+
+[node name="MaxButton" type="Button" parent="RadarWindow/ResizeHandle_TopRight"]
+layout_mode = 0
+offset_left = -44.9999
+offset_top = -1.0
+offset_right = 3.00006
+offset_bottom = 41.0
+size_flags_horizontal = 4
+size_flags_vertical = 0
+action_mode = 0
+icon = ExtResource("2_x4hqw")
+vertical_icon_alignment = 0
+script = ExtResource("14_x1kh4")
+
 [node name="ResizeHandle_BottomLeft" type="Control" parent="RadarWindow"]
 custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
@@ -176,16 +373,87 @@ layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
 
-[node name="CloseButton" type="Button" parent="RadarWindow"]
+[node name="PowerWindow" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 2
+anchor_left = 0.205
+anchor_top = 0.208
+anchor_right = 0.37
+anchor_bottom = 0.328
+offset_left = 0.784973
+offset_top = 0.167999
+offset_right = 316.49
+offset_bottom = 134.688
+scale = Vector2(0.5, 0.5)
+theme_override_styles/panel = SubResource("StyleBoxTexture_cmeoe")
+
+[node name="BlueBar" type="ColorRect" parent="PowerWindow"]
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+size_flags_vertical = 0
+color = Color(0, 0, 0.509804, 1)
+
+[node name="Label" type="Label" parent="PowerWindow/BlueBar"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 255.0
+offset_right = -257.016
+offset_bottom = 20.0
+grow_vertical = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "POWER"
+label_settings = SubResource("LabelSettings_m10nw")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ResizeHandle_TopRight" type="Control" parent="PowerWindow"]
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
+
+[node name="CloseButton" type="Button" parent="PowerWindow/ResizeHandle_TopRight"]
+layout_mode = 0
+offset_left = 2.00006
+offset_top = -1.0
+offset_right = 50.0001
+offset_bottom = 41.0
+size_flags_horizontal = 8
+size_flags_vertical = 0
+action_mode = 0
 icon = ExtResource("2_x4hqw")
 vertical_icon_alignment = 0
 script = ExtResource("11_u55vk")
 
-[node name="SubViewport" type="SubViewport" parent="RadarWindow"]
-script = ExtResource("12_a2ytu")
+[node name="SleepButton" type="Button" parent="PowerWindow/ResizeHandle_TopRight"]
+layout_mode = 2
+offset_left = -505.0
+offset_top = 90.0
+offset_right = -384.0
+offset_bottom = 206.0
+action_mode = 0
+text = "Sleep"
+
+[node name="ShutDownButton" type="Button" parent="PowerWindow/ResizeHandle_TopRight"]
+layout_mode = 0
+offset_left = -322.0
+offset_top = 91.0
+offset_right = -201.0
+offset_bottom = 207.0
+action_mode = 0
+text = "Shut Down"
+
+[node name="RestartButton" type="Button" parent="PowerWindow/ResizeHandle_TopRight"]
+layout_mode = 0
+offset_left = -137.0
+offset_top = 90.0
+offset_right = -16.0
+offset_bottom = 206.0
+action_mode = 0
+text = "Restart"
 
 [node name="Select Box" type="ColorRect" parent="."]
 visible = false
@@ -194,3 +462,33 @@ offset_right = 150.0
 offset_bottom = 150.0
 color = Color(0.270588, 0.74902, 0.760784, 0.462745)
 script = ExtResource("13_grsae")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 5
+follow_viewport_enabled = true
+
+[node name="Mouse" type="Sprite2D" parent="CanvasLayer"]
+visibility_layer = 3
+z_index = 925
+position = Vector2(316.759, 104.143)
+scale = Vector2(0.0367669, 0.0367669)
+texture = ExtResource("6_t47wd")
+script = ExtResource("9_4o6ex")
+
+[node name="SleepTimer" type="Timer" parent="."]
+wait_time = 30.0
+one_shot = true
+script = ExtResource("41_h52vl")
+
+[node name="BootScreen" type="AnimatedSprite2D" parent="."]
+position = Vector2(348.792, 197.156)
+scale = Vector2(0.983768, 0.983767)
+sprite_frames = SubResource("SpriteFrames_0n71a")
+animation = &"Off"
+autoplay = "Off"
+script = ExtResource("40_yr43v")
+
+[connection signal="button_down" from="PowerWindow/ResizeHandle_TopRight/SleepButton" to="BootScreen" method="_on_sleep_button_button_down"]
+[connection signal="button_down" from="PowerWindow/ResizeHandle_TopRight/ShutDownButton" to="BootScreen" method="_on_shut_down_button_button_down"]
+[connection signal="button_down" from="PowerWindow/ResizeHandle_TopRight/RestartButton" to="BootScreen" method="_on_restart_button_button_down"]
+[connection signal="timeout" from="SleepTimer" to="BootScreen" method="_on_sleep_timer_timeout"]
