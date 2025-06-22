@@ -78,12 +78,17 @@ func _physics_process(delta: float) -> void:
 		move_and_slide()
 	# Ship Movement
 	else:
+		#SCREEN CURSOR DEBUG CODE
+		if Input.is_action_just_pressed("toggle_debug_flight"):
+			Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+		
 		var input_dir := Input.get_vector("move_left", "move_right", "move_forward", "move_backward")
 		var direction := 0.5 * (currentVehicle.global_basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+		var local_up = -global_transform.basis.y  # Local "up" direction of this object
 		if Input.is_action_pressed("jump"):
-			direction.y = 0.5
+			direction = direction + (local_up.normalized() * -0.5)
 		elif Input.is_action_pressed("crouch"):
-			direction.y = -0.5
+			direction = direction + (local_up.normalized() * 0.5)
 		elif Input.is_action_pressed("stop"):
 			if Input.is_action_pressed("toggle"):
 				direction =  -0.5 * currentVehicle.angular_velocity.normalized()
@@ -95,7 +100,7 @@ func _physics_process(delta: float) -> void:
 		#direction = direction.rotated(currentVehicle.basis.y, currentVehicle.basis.get_euler().y)
 		
 		if Input.is_action_pressed("toggle"):
-			currentVehicle.apply_torque(direction * currentVehicle.speed)
+			currentVehicle.apply_torque((direction * 0.2) * currentVehicle.speed)
 		else:
 			currentVehicle.apply_central_force(direction * currentVehicle.speed)
 	#label.text = str(velocity if currentVehicle == null else currentVehicle.linear_velocity)

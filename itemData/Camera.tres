@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="Camera" load_steps=3 format=3 uid="uid://gn7nxjqi73jn"]
+
+[ext_resource type="Script" path="res://scripts/classes/itemClasses/toolClasses/Camera.gd" id="1_r0v7h"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_dni37"]
+
+[resource]
+script = ExtResource("1_r0v7h")
+isEquipped = false
+itemName = "Camera"
+desciption = "Looks at spookies"
+model = SubResource("CylinderMesh_dni37")
+isInInventory = false

@@ -21,9 +21,10 @@ func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 func _unhandled_input(event):
-	if event is InputEventMouseMotion and GlobalVariables.inRadar == true:
-		yaw -= event.relative.x * rotation_sensitivity
-		pitch = clamp(pitch - event.relative.y * rotation_sensitivity, min_pitch, max_pitch)
+	if event is InputEventMouseMotion and GlobalVariables.inRadar == true and Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		if event:
+			yaw -= event.relative.x * rotation_sensitivity
+			pitch = clamp(pitch - event.relative.y * rotation_sensitivity, min_pitch, max_pitch)
 
 	elif event is InputEventMouseButton && GlobalVariables.inRadar == true:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:

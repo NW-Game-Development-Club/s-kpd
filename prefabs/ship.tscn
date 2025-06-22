@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://2gnjkdtykap2"]
+[gd_scene load_steps=29 format=3 uid="uid://2gnjkdtykap2"]
 
 [ext_resource type="Script" path="res://scripts/classes/Ship.gd" id="1_ysgku"]
 [ext_resource type="ArrayMesh" uid="uid://s4wogw3wkgcy" path="res://meshes/ShipMesh.tres" id="2_0ydde"]
@@ -8,9 +8,9 @@
 [ext_resource type="Script" path="res://scripts/radar.gd" id="6_fcng6"]
 [ext_resource type="Script" path="res://prefabs/sub_viewport_container.gd" id="7_2qjof"]
 [ext_resource type="Script" path="res://prefabs/sub_viewport.gd" id="7_mco7f"]
-[ext_resource type="Script" path="res://prefabs/Camera Orbit.gd" id="7_qo3cn"]
 [ext_resource type="Script" path="res://prefabs/camera_3d.gd" id="8_7pj8l"]
 [ext_resource type="PackedScene" uid="uid://c3fogervwojm4" path="res://win_desktop.tscn" id="8_vp3yw"]
+[ext_resource type="Texture2D" uid="uid://bknsmqpycqx31" path="res://03.png" id="11_2xyyu"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0bqit"]
 albedo_color = Color(0.205991, 0.455751, 0.980366, 1)
@@ -48,7 +48,21 @@ height = 0.2
 radial_segments = 300
 rings = 100
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fyln4"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.0235294)
+albedo_texture = ExtResource("11_2xyyu")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ks67f"]
+next_pass = SubResource("StandardMaterial3D_fyln4")
+transparency = 1
+albedo_color = Color(0.0177324, 0.0177324, 0.0177324, 0.133333)
+metallic = 0.68
+metallic_specular = 0.57
+roughness = 0.39
+
 [sub_resource type="PlaneMesh" id="PlaneMesh_6hxsb"]
+material = SubResource("StandardMaterial3D_ks67f")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_l1gyb"]
 viewport_path = NodePath("RadarScreen/Radar_Screen/SubViewportContainer/SubViewport")
@@ -67,7 +81,7 @@ shader_parameter/metallic_texture_channel = null
 shader_parameter/specular = 0.0
 shader_parameter/metallic = null
 shader_parameter/emission = Color(1, 1, 1, 1)
-shader_parameter/emission_energy = 3.0
+shader_parameter/emission_energy = 6.0
 shader_parameter/uv1_scale = Vector3(1, 1, 1)
 shader_parameter/uv1_offset = null
 shader_parameter/uv2_scale = Vector3(1, 1, 1)
@@ -80,17 +94,15 @@ size = Vector3(2.05618, 0.578857, 2.28882)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_swb82"]
 
-[sub_resource type="Environment" id="Environment_3pspk"]
-background_mode = 1
-background_color = Color(0.523051, 0.708606, 0.700353, 1)
-
 [node name="Ship" type="RigidBody3D" groups=["ship"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.39886, -0.359017, -0.21339)
+mass = 1000.0
 gravity_scale = 0.0
+inertia = Vector3(1000, 1000, 1000)
 can_sleep = false
 angular_damp = 5.0
 script = ExtResource("1_ysgku")
-speed = 10.0
+speed = 10000.0
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = ExtResource("2_0ydde")
@@ -153,26 +165,27 @@ collision_mask = 4
 script = ExtResource("5_4a11w")
 
 [node name="Radar_Screen" type="MeshInstance3D" parent="RadarScreen"]
-transform = Transform3D(0.594981, -0.00330407, 1.03473e-08, 0.00353538, 0.299347, -0.277217, 0.00327389, 0.277208, 0.299357, 0.0183126, 0.298084, -4.28384)
+transform = Transform3D(0.604921, -0.00330323, 1.03473e-08, 0.00359444, 0.299271, -0.277217, 0.00332858, 0.277138, 0.299357, 0.0183126, 0.298084, -4.28384)
 mesh = SubResource("PlaneMesh_6hxsb")
 skeleton = NodePath("../../..")
 surface_material_override/0 = SubResource("ShaderMaterial_0llg3")
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="RadarScreen/Radar_Screen"]
-anchors_preset = -1
-anchor_left = -2.296
-anchor_right = -0.851
-anchor_bottom = 1.758
-offset_left = -0.00805664
-offset_top = 18.0
-offset_right = 0.35199
-offset_bottom = -0.184082
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -3424.0
+offset_top = -232.0
+offset_right = -3473.0
+offset_bottom = 232.0
+grow_horizontal = 2
+grow_vertical = 2
 script = ExtResource("7_2qjof")
 metadata/_edit_use_anchors_ = true
 
 [node name="SubViewport" type="SubViewport" parent="RadarScreen/Radar_Screen/SubViewportContainer"]
 handle_input_locally = false
-size = Vector2i(1665, 1121)
+size = Vector2i(672, 416)
 render_target_update_mode = 4
 script = ExtResource("7_mco7f")
 
@@ -192,8 +205,7 @@ shape = SubResource("BoxShape3D_swb82")
 transform = Transform3D(0.999967, 9.31292e-10, -0.00809821, 0.0059418, 0.679454, 0.733694, 0.00550236, -0.733718, 0.679432, 0.034, 0.704, -3.906)
 script = ExtResource("8_7pj8l")
 
-[node name="RadarCamera" type="Camera3D" parent="RadarScreen"]
-transform = Transform3D(1, -1.39698e-09, -9.31322e-10, 1.39698e-09, 1, -2.08616e-07, 9.31322e-10, 2.08616e-07, 1, -0.39886, 0.359015, 0.213394)
-cull_mask = 1048574
-environment = SubResource("Environment_3pspk")
-script = ExtResource("7_qo3cn")
+[node name="Radar_Glass" type="MeshInstance3D" parent="RadarScreen"]
+transform = Transform3D(0.599977, -0.00356043, 0, 0.00384175, 0.29935, -0.277212, 0.0035575, 0.277202, 0.299362, 0.018, 0.307039, -4.27537)
+mesh = SubResource("PlaneMesh_6hxsb")
+skeleton = NodePath("../..")

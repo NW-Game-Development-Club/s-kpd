@@ -21,6 +21,9 @@ extends Node3D
 @export_group("Buttons")
 @export var dropButton:Button
 
+signal entered_computer
+signal exited_computer
+
 var currentWeaponSet: int = 0
 var selectedItem: Item
 
@@ -101,7 +104,7 @@ func _input(event):
 		
 		if result:
 			if parent.currentVehicle == null:
-				if result.collider.is_in_group("items"):
+				if "collider" in result and result["collider"].is_in_group("items"):
 					print("test")
 					var pickedTool:Item = result.collider.item
 					inventory.append(pickedTool)
@@ -115,18 +118,23 @@ func _input(event):
 						
 					# Call the world item to do its pick up stuff such as hiding itself
 					result.collider.onPickup(self)
-				elif result.collider is Ship:
+				elif "collider" in result and result["collider"] is Ship:
 					result.collider.setPilot(parent)
 					parent.pilotVehicle(result.collider)
-					
-			elif str(result.collider).substr(0, 11) == "RadarScreen":
-				GlobalVariables.inRadar = !GlobalVariables.inRadar
-				if GlobalVariables.inRadar:
-					GlobalVariables.tweenCamera.start_camera_transition(camera, GlobalVariables.radarScreenCamera)
-					Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-				else:
-					GlobalVariables.tweenCamera.start_camera_transition(GlobalVariables.radarScreenCamera, camera)
-					Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+				
+			elif "collider" in result and result["collider"]:
+				if str(result["collider"]).substr(0, 11) == "RadarScreen":
+					GlobalVariables.inRadar = !GlobalVariables.inRadar
+					if GlobalVariables.inRadar:
+						GlobalVariables.tweenCamera.start_camera_transition(camera, GlobalVariables.radarScreenCamera)
+						Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+						emit_signal("entered_computer")
+						$"../Crosshair".hide()
+					else:
+						GlobalVariables.tweenCamera.start_camera_transition(GlobalVariables.radarScreenCamera, camera)
+						Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+						emit_signal("exited_computer")
+						$"../Crosshair".show()
 				
 			else: 
 				parent.currentVehicle.unPilot()
