@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" path="res://scenes/task_list.gd" id="1_m8wia"]
 [ext_resource type="Script" path="res://scripts/healthHandler.gd" id="2_davto"]
-[ext_resource type="Script" path="res://scenes/mesh_instance_3d.gd" id="2_v3xfv"]
+[ext_resource type="Script" path="res://scripts/mesh_instance_3d.gd" id="2_v3xfv"]
 [ext_resource type="PackedScene" uid="uid://byxg4e0k0cuym" path="res://prefabs/item_shell.tscn" id="3_sn03i"]
 [ext_resource type="Resource" uid="uid://deyphsaiyuifx" path="res://itemData/GenericUndoerOfNiceties.tres" id="4_w6fcp"]
 [ext_resource type="Resource" uid="uid://cpmamxdhi2ab7" path="res://itemData/ProjectingIssues.tres" id="5_yov0m"]
 [ext_resource type="PackedScene" uid="uid://3mcgdp8sij0t" path="res://prefabs/better_character.tscn" id="6_4otqv"]
 [ext_resource type="PackedScene" uid="uid://2gnjkdtykap2" path="res://prefabs/ship.tscn" id="6_kh8fr"]
-[ext_resource type="Resource" uid="uid://gn7nxjqi73jn" path="res://itemData/Camera.tres" id="8_dxcbi"]
+[ext_resource type="Resource" path="res://itemData/Camera.tres" id="8_dxcbi"]
+
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_luxdj"]
 size = Vector3(14.5686, 1, 22.315)
