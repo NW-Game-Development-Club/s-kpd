@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvhdaykdb1qwq"]
+
+[ext_resource type="Script" path="res://scripts/classes/Tile.gd" id="1_bbwd6"]
+[ext_resource type="ArrayMesh" uid="uid://d4mlgwrlf87rh" path="res://meshes/proceduralMapParts/int/meshes/straight.res" id="2_wtdld"]
+
+[node name="Straight" type="Node3D" node_paths=PackedStringArray("spawnNodes")]
+script = ExtResource("1_bbwd6")
+tileName = "Straight"
+spawnNodes = [NodePath("exit")]
+
+[node name="Straight" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5459, -5.00135)
+mesh = ExtResource("2_wtdld")
+
+[node name="exit" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -10)
